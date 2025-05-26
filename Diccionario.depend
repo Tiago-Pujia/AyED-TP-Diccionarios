@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1748296676 source:c:\users\bauri\onedrive\documentos\codigo\practica algoritmos\tp diccionario\diccionario\main.c
+	"Diccionario.h"
+
+1748296184 c:\users\bauri\onedrive\documentos\codigo\practica algoritmos\tp diccionario\diccionario\diccionario.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1748296373 source:c:\users\bauri\onedrive\documentos\codigo\practica algoritmos\tp diccionario\diccionario\diccionario.c
+	"diccionario.h"
+
