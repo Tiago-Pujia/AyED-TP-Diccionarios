@@ -114,21 +114,23 @@ int sacar_dic(tDiccionario* pd, void* clave, size_t tam_clave, void* info, size_
 
     return TODO_OK;
 }
+
 void recorrer_dic(const tDiccionario* pd, Accion accion, void* param)
 {
     tLista* pl;
     //Recorro las Listas
     for(int i = 0; i < TAM_DICC ; i++)
     {
-        pl = (tLista*)&pd->tabla[i];
+        pl = (tLista*) &pd->tabla[i];
         //Recorro una de las listas
         while(*pl)
         {
-            accion((*pl)->info, param);
+            accion((*pl)->clave, (*pl)->info, param);
             pl = &(*pl)->sig;
         }
     }
 }
+
 void vaciar_dic(const tDiccionario* pd)
 {
     tLista* pl;

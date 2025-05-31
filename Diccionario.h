@@ -53,7 +53,7 @@ typedef struct
 
 
 typedef int(*Cmp)(const void* a, const void* b);
-typedef void (*Accion)(void*, void*);
+typedef void (*Accion)(void*, void*, void*);
 typedef void (*Actualizar)(void*, void*);
 
 

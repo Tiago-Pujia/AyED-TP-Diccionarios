@@ -3,7 +3,7 @@
 
 //EJEMPLO INTS
 int comparar_ints(const void* a, const void* b);
-void Imprimir_ints(void* a, void* params);
+void Imprimir_ints(void* a, void* c, void* params);
 void actualizar_ints(void* a, void* b);
 //EJEMPLO INTS
 
@@ -68,7 +68,7 @@ int comparar_ints(const void* a, const void* b)
     return *a1 - *b1;
 }
 
-void Imprimir_ints(void* a, void* params)
+void Imprimir_ints(void* a, void* c,void* params)
 {
     int* b = (int*) a;
     printf("%d\n", *b);
