@@ -15,6 +15,15 @@
 #define NO_ENCONTRADO 0
 #define SIN_MEM 0
 #define DUPLICADO 0
+#define ERROR 0
+
+#define TAM_LINEA 1000
+#define ES_PUNTUACION(c) ((c)=='.'||(c)==','||(c)==';'||(c)=='!'||(c)=='?'||(c)==':'||(c)=='"'||(c)=='('||(c)==')' || (c) == '-')
+#define ES_LETRA(c) (((c)>= 'a' && (c)<= 'z') || ((c)>= 'A' && (c) <= 'Z'))
+#define mi_toLower(X) (((X)>= 'A' && (X) <= 'Z') ? ((X)+32) : (X))
+#define TAM_PAL 100
+
+#define MAX_ALU 15
 
 
 
@@ -31,9 +40,17 @@ typedef tNodo* tLista;
 
 typedef struct
 {
-    tLista tabla[TAM_DICC];
+    tLista tabla[TAM_DICC]; //tabla hash
 }
 tDiccionario;
+
+typedef struct
+{
+    int cantPalabras;
+    int cantEspacios;
+    int cantPuntuacion;
+}tProcesadorTexto;
+
 
 typedef int(*Cmp)(const void* a, const void* b);
 typedef void (*Accion)(void*, void*);
@@ -48,5 +65,10 @@ void recorrer_dic(const tDiccionario* pd, Accion accion, void* param);
 void vaciar_dic(const tDiccionario* pd);
 
 size_t _hasheo_dic(void* clave, size_t len);
+
+
+
+//Procesador De Texto
+void normalizar(char * cadena);
 
 #endif // DICCIONARIO_H

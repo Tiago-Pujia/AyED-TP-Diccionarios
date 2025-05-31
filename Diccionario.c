@@ -2,7 +2,7 @@
 
 void crear_dic(tDiccionario* pd)
 {
-    memset(pd->tabla, 0, TAM_DICC * sizeof(tLista));
+    memset(pd->tabla, 0, TAM_DICC * sizeof(tLista)); //inicializo en 0 la tabla
 }
 
 int poner_dic(tDiccionario* pd, void* clave, size_t tam_clave, const void* info, size_t tam_info, Cmp cmp, Actualizar actualizar)
@@ -29,7 +29,7 @@ int poner_dic(tDiccionario* pd, void* clave, size_t tam_clave, const void* info,
         return SIN_MEM;
     }
 
-    lista = &pd->tabla[pos];
+    lista = &pd->tabla[pos]; //va hacia la lista
 
     while(*lista)
     {
@@ -69,8 +69,10 @@ int obtener_dic(tDiccionario* pd, void* clave, size_t tam_clave, void* info, siz
         lista = &(*lista)->sig;
     }
 
-    if(cmp((*lista)->clave, clave) != 0)
-        return NO_ENCONTRADO;
+    if(!*lista)
+    {
+        return NO_ENCONTRADO; //directamente si esta al final, no esta la clave
+    }
 
     aux = *lista;
     memcpy(info, aux->info, aux->tam_info > tam_info ? tam_info : aux->tam_info);
@@ -80,7 +82,7 @@ int obtener_dic(tDiccionario* pd, void* clave, size_t tam_clave, void* info, siz
 }
 int sacar_dic(tDiccionario* pd, void* clave, size_t tam_clave, void* info, size_t tam_info, Cmp cmp)
 {
-        size_t pos = _hasheo_dic(clave, tam_clave);
+    size_t pos = _hasheo_dic(clave, tam_clave);
     tLista* lista;
     tNodo* aux;
 
@@ -94,8 +96,11 @@ int sacar_dic(tDiccionario* pd, void* clave, size_t tam_clave, void* info, size_
         lista = &(*lista)->sig;
     }
 
-    if(cmp((*lista)->clave, clave) != 0)
-        return NO_ENCONTRADO;
+    if(!*lista)
+    {
+        return NO_ENCONTRADO; //directamente si esta al final, no esta la clave
+    }
+
 
     aux = *lista;
 
@@ -104,6 +109,7 @@ int sacar_dic(tDiccionario* pd, void* clave, size_t tam_clave, void* info, size_
     *lista = aux->sig;
 
     free(aux->info);
+    free(aux->clave); //liberar clave
     free(aux);
 
     return TODO_OK;
@@ -114,7 +120,7 @@ void recorrer_dic(const tDiccionario* pd, Accion accion, void* param)
     //Recorro las Listas
     for(int i = 0; i < TAM_DICC ; i++)
     {
-        pl = (tLista*) &pd->tabla[i];
+        pl = (tLista*)&pd->tabla[i];
         //Recorro una de las listas
         while(*pl)
         {
@@ -130,7 +136,7 @@ void vaciar_dic(const tDiccionario* pd)
     //Recorro las Listas
     for(int i = 0; i < TAM_DICC ; i++)
     {
-        pl = (tLista*) &pd->tabla[i];
+        pl = (tLista*)&pd->tabla[i];
         //Recorro una de las listas
         while(*pl)
         {
@@ -151,4 +157,102 @@ size_t _hasheo_dic(void* clave, size_t len)
     for(i = 0; i < len ; i++)
         hash = hash * 37 + *(data+i);
     return hash % TAM_DICC;
+}
+
+
+int procesarArchivo(const char*archivo, tDiccionario*dic)
+{
+    FILE *pf = fopen(archivo,"rt");
+
+    if(!pf)
+    {
+        printf("No se pudo abrir el archivo");
+        return ERROR;
+    }
+    tProcesadorTexto aux;
+    aux.cantEspacios=0;
+    aux.cantPalabras=0;
+    aux.cantPuntuacion=0;
+
+    char linea[TAM_LINEA];
+
+    while(fgets(linea,TAM_LINEA, pf))
+    {
+        trozar(linea,dic, &aux);
+    }
+
+    fclose(pf);
+
+    return TODO_OK;
+
+}
+
+void trozar(char *linea, tDiccionario*dic, tProcesadorTexto*aux)
+{
+    char palabra[TAM_PAL];
+    char* pPal = palabra;
+    int cantPal = 1; //cada vez q se agrega una palabra, arranca en 1
+
+    while (*linea)
+    {
+        if (ES_LETRA(*linea))
+        {
+            *pPal = *linea;
+            pPal++;
+        }
+        else
+        {
+            if (pPal != palabra)
+            {
+                *pPal = '\0';
+                normalizar(palabra);
+
+                poner_dic(dic, palabra, &cantPal, sizeof(cantPal), cmp_pal, acum);
+                aux->cantPalabras++;
+                pPal = palabra; //reinicio para la proxima palabra
+            }
+
+            if (*linea == ' ' || *linea == '\t')
+                aux->cantEspacios++;
+            else if (ES_PUNTUACION(*linea))
+                aux->cantPuntuacion++;
+        }
+
+        linea++;
+    }
+
+    if (pPal != palabra)
+    {
+        *pPal = '\0';
+        normalizar(palabra);
+        poner_dic(dic, palabra, &cantPal, sizeof(cantPal), cmp_pal, acum);
+        aux->cantPalabras++;
+    }
+
+}
+
+int cmp_pal(const void* a, const void* b)
+{
+    return strcmp((const char*)a, (const char*)b);
+}
+
+
+void acum(void* existente, const void* nuevo)
+{
+    (*(int*)existente)++;
+}
+
+
+void normalizar(char * cadena)
+{
+    char *pLec = cadena;
+    char *pEsc = cadena;
+
+    while(*pLec)
+    {
+        *pEsc = mi_toLower(*pLec);
+        pEsc++;
+        pLec++;
+    }
+    *pEsc = '\0';
 }
