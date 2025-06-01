@@ -1,0 +1,9 @@
+¡Los algoritmos son el corazon de la programacion! ¿Que es un algoritmo? Es un conjunto de instrucciones —claras, finitas y ordenadas— que permiten resolver un problema, o realizar una tarea...
+
+Las estructuras que de datos, por otro lado, ¡son fundamentales! (Si, lo son.) ¿Por que? Porque permiten almacenar, organizar, y manipular la informacion de forma eficiente: listas, pilas, colas... ¡arboles!, grafos, etc.
+
+Elegir bien la estructura de datos adecuada (¡ojo con esto!) puede hacer que un algoritmo sea mucho mas rapido, mas claro... y que consuma menos memoria. Por ejemplo: una busqueda en un arbol binario balanceado es mas eficiente que una busqueda secuencial en una lista desordenada.
+
+Existen muchos algoritmos clasicos: busqueda binaria, ordenamiento por burbuja, insercion, seleccion, quicksort... ¿Los conoces?
+
+En resumen: comprender como interactuan los algoritmos con las estructuras de datos es **esencial** para desarrollar programas robustos, optimizados, y escalables. ¡No lo olvides!

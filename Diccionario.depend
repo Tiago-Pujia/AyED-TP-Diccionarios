@@ -10,3 +10,33 @@
 1748296373 source:c:\users\bauri\onedrive\documentos\codigo\practica algoritmos\tp diccionario\diccionario\diccionario.c
 	"diccionario.h"
 
+1748721806 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\diccionario.c
+	"diccionario.h"
+
+1748725089 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\diccionario.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1748722659 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\main.c
+	"Diccionario.h"
+	"InterfazUsuario.h"
+	"procesadorTexto.h"
+
+1748737144 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\interfazusuario.c
+	"InterfazUsuario.h"
+	"Diccionario.h"
+	"procesadorTexto.h"
+
+1748720768 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\interfazusuario.h
+	<stdio.h>
+	<string.h>
+
+1748737725 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\procesadordetexto.c
+	"Diccionario.h"
+	"procesadorTexto.h"
+
+1748737109 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\tp diccionario\tp-diccionarios\procesadortexto.h
+	<stdio.h>
+	<string.h>
+

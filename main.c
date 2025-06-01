@@ -1,5 +1,6 @@
 #include "Diccionario.h"
-
+#include "InterfazUsuario.h"
+#include "procesadorTexto.h"
 
 //EJEMPLO INTS
 int comparar_ints(const void* a, const void* b);
@@ -29,7 +30,8 @@ void cargarVecAlumnos(tAlumno * vec, size_t cantReg);
 
 int main()
 {
-    tDiccionario diccionario;
+    mostrarInterfaz();
+    /*tDiccionario diccionario;
     tAlumno alu[MAX_ALU];
     //EJEMPLO INTS
 
@@ -56,12 +58,12 @@ int main()
 
     printf("\nDiccionario:\n");
     recorrer_dic(&diccionario, Imprimir_ints,NULL);
-    printf("Fin\n\n");
+    printf("Fin\n\n");*/
 
     return 0;
 }
 
-int comparar_ints(const void* a, const void* b)
+/*int comparar_ints(const void* a, const void* b)
 {
     int* a1 = (int*) a;
     int* b1 = (int*) b;
@@ -92,7 +94,7 @@ int comparar_alumnos(const void* a, const void* b)
 }
 void Imprimir_alumnos(void* a, void* params)
 {
-    Alumno* a1 = (Alumno*)a;
+    tAlumno* a1 = (tAlumno*)a;
     printf("\nAlumno: %s\n", a1->nyAp);
     printf("Dni: %d\n", a1->dni);
     printf("notas: %d,%d,%d\n", a1->notas[0], a1->notas[1], a1->notas[2]);
@@ -122,4 +124,4 @@ void cargarVecAlumnos(tAlumno *vec, size_t cantReg)
     for(i = 0; i < cantReg; i++)
         vec[i] = datosPrueba[i];
 }
-//EJEMPLO REALISTA (en progreso...)
+//EJEMPLO REALISTA (en progreso...)*/

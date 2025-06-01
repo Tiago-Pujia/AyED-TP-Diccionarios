@@ -1,37 +1,42 @@
 #include "InterfazUsuario.h"
 #include "Diccionario.h"
-
+#include "procesadorTexto.h"
 void mostrarInterfaz()
 {
     char ruta_archivo[MAX_RUTA];
     FILE* archivo = NULL;
     int archivo_valido;
-    // tDiccionario dicc;
+    tDiccionario dicc;
+    tProcesadorTexto datos;
+    iniciarEnCero(&datos);
 
     imprimir_especificacion();
 
     printf("Ingresa a continuacion la ruta del archivo de texto que queres analizar\n");
-    if (fgets(ruta_archivo, MAX_RUTA, stdin) == NULL)
+    if(fgets(ruta_archivo, MAX_RUTA, stdin) == NULL)
     {
         printf("Ocurrio un error al leer la ruta del archivo.\n");
         return;
     }
 
     size_t len = strlen(ruta_archivo);
-    if (len > 0 && ruta_archivo[len - 1] == '\n')
+    if(len > 0 && ruta_archivo[len - 1] == '\n')
         ruta_archivo[len - 1] = '\0';
 
     // PENDIENTE: consultar si se deja asi o se ejecuta hasta que el usuario corte la ejecucion o ingrese un archivo valido
     archivo_valido = validar_archivo(ruta_archivo, &archivo);
-    if (archivo_valido != 0)
+    if(archivo_valido != 0)
         return;
 
 
-    // crear_dic(&dicc);
+    crear_dic(&dicc);
 
-    // procesarArchivo(archivo);
+    procesarArchivo(archivo, &dicc, &datos);
+    podioPalabras(&dicc, TOP_PAL, &datos);
+    mostrar_estadisticas(&datos, &dicc);
 
-    // vaciar_dic(&dicc);
+
+    vaciar_dic(&dicc);
 
     fclose(archivo);
 
