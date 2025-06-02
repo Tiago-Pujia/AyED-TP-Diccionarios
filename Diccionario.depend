@@ -40,3 +40,58 @@
 	<stdio.h>
 	<string.h>
 
+1748854180 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\interfazusuario.c
+	"InterfazUsuario.h"
+	"TDA_Diccionario/dic.h"
+	"procesadorTexto.h"
+
+1748854398 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\interfazusuario.h
+	<stdio.h>
+	<string.h>
+
+1748782080 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\diccionario.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1748853871 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1748855025 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\main.c
+	"TDA_Diccionario/dic.h"
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+
+1748845755 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\diccionario.c
+	"diccionario.h"
+
+1748853815 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\procesadordetexto.c
+	"TDA_Diccionario/dic.h"
+	"procesadorTexto.h"
+
+1748854302 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1748849958 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\tda_diccionario\dic.c
+	"dic.h"
+
+1748855104 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\interfaz\interfaz.c
+	"interfaz.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1748854961 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\interfaz\interfaz.h
+	<stdio.h>
+	<string.h>
+
+1748854889 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1748855075 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp diccionarios\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+

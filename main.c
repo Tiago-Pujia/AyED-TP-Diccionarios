@@ -1,14 +1,19 @@
-#include "Diccionario.h"
-#include "InterfazUsuario.h"
-#include "procesadorTexto.h"
+#include "TDA_Diccionario/dic.h"
+#include "Interfaz/interfaz.h"
+#include "ProcesadorTexto/procesadorTexto.h"
 
+int main()
+{
+    iniciarAnalisisTexto();
+    return 0;
+}
+
+/*
 //EJEMPLO INTS
 int comparar_ints(const void* a, const void* b);
 void Imprimir_ints(void* a, void* c, void* params);
 void actualizar_ints(void* a, void* b);
 //EJEMPLO INTS
-
-
 
 //EJEMPLO REALISTA (en progreso...)
 
@@ -30,8 +35,7 @@ void cargarVecAlumnos(tAlumno * vec, size_t cantReg);
 
 int main()
 {
-    mostrarInterfaz();
-    /*tDiccionario diccionario;
+    tDiccionario diccionario;
     tAlumno alu[MAX_ALU];
     //EJEMPLO INTS
 
@@ -58,7 +62,7 @@ int main()
 
     printf("\nDiccionario:\n");
     recorrer_dic(&diccionario, Imprimir_ints,NULL);
-    printf("Fin\n\n");*/
+    printf("Fin\n\n");
 
     return 0;
 }
