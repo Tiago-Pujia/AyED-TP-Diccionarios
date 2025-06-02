@@ -167,7 +167,7 @@ void generarPodioPalabras(tDic* dic, int posicion, tEstText* estText)
     if (posicion > 0)
     {
         // Recorremos cada lista de la tabla hash
-        for (size_t i = 0; i < TAM_TABLA_HASH; i++)
+        for (size_t i = 0; i < TAM_DIC; i++)
         {
             tLista lista = dic->tabla[i];
 

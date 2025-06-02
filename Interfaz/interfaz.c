@@ -16,12 +16,8 @@ void iniciarAnalisisTexto()
 {
     char ruta[MAX_RUTA];           // Ruta ingresada por el usuario
     FILE* arch = NULL;             // Puntero al archivo
-    int estadoValidacion;         // Resultado de validarArchivoTxt
-
     tDic dicc;                     // Diccionario de palabras
     tEstText estadisticas;        // Estructura para estadísticas del texto
-
-    iniEstadisticas(&estadisticas);  // Inicializamos contadores y podio
 
     mostrarInstrucciones();  // Instrucciones y presentación
 
@@ -37,26 +33,26 @@ void iniciarAnalisisTexto()
     // Eliminamos el salto de línea final si está presente
     size_t len = strlen(ruta);
     if (len > 0 && ruta[len - 1] == '\n')
+    {
         ruta[len - 1] = '\0';
+    }
 
     // Validamos el archivo (existe, es .txt, no está vacío)
-    estadoValidacion = validarArchivoTxt(ruta, &arch);
-    if (estadoValidacion != 0)
-        return;  // Finaliza si el archivo no es válido
+    if (validarArchivoTxt(ruta, &arch) != 0)
+    {
+        return;
+    }
 
-    // Inicializamos el diccionario
+    // Inicializamos el diccionario y contadores
     crearDic(&dicc);
+    iniEstadisticas(&estadisticas);
 
     // Procesamos el contenido del archivo y generamos estadísticas
     procesarArch(arch, &dicc, &estadisticas);
     generarPodioPalabras(&dicc, TOP_PAL, &estadisticas);
-
-    // Mostramos las estadísticas recolectadas
     mostrarEstadisticas(&estadisticas, &dicc);
 
-    // Liberamos la memoria ocupada por el diccionario
-    vaciarDic(&dicc);
-
+    vaciarDic(&dicc); // Liberamos la memoria ocupada por el diccionario
     fclose(arch);  // Cerramos el archivo abierto
 }
 

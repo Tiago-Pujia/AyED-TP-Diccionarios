@@ -3,7 +3,7 @@
 // Inicializa la tabla del diccionario en cero (listas vacías)
 void crearDic(tDic* const dic)
 {
-    memset(dic->tabla, 0, TAM_TABLA_HASH * sizeof(tLista));
+    memset(dic->tabla, 0, TAM_DIC * sizeof(tLista));
 }
 
 /// Inserta un nuevo elemento en el diccionario.
@@ -174,7 +174,7 @@ void recorrerDic(const tDic* const dic, Accion accion, void* param)
 {
     tLista *lista;
     // Recorremos cada posición de la tabla
-    for (int i = 0; i < TAM_TABLA_HASH; i++)
+    for (int i = 0; i < TAM_DIC; i++)
     {
         // Apuntamos a la lista de la posición actual
         lista = (tLista*)&dic->tabla[i];
@@ -199,7 +199,7 @@ void vaciarDic(tDic* const dic)
     size_t i;
 
     // Recorremos cada posición de la tabla
-    for (i = 0; i < TAM_TABLA_HASH; i++)
+    for (i = 0; i < TAM_DIC; i++)
     {
         lista = &dic->tabla[i];  // Apuntamos al inicio de la lista en esta posición
 
@@ -237,6 +237,6 @@ size_t _hasheo_dic(const void* clave, const size_t len)
         hash = hash * 37 + data[i];
     }
 
-    // Finalmente, reducimos el hash al rango válido [0, TAM_TABLA_HASH - 1]
-    return hash % TAM_TABLA_HASH;
+    // Finalmente, reducimos el hash al rango válido [0, TAM_DIC - 1]
+    return hash % TAM_DIC;
 }

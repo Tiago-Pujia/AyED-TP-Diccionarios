@@ -9,11 +9,11 @@
 //                  CONSTANTES GENERALES
 // =======================================================
 
-#define TAM_TABLA_HASH   10          // Tamaño de la tabla hash
+#define TAM_DIC          10          // Tamaño de la tabla hash
 #define CONST_HASH     5947          // Constante utilizada en la función hash
 
 #define EXITO            1           // Operación exitosa
-#define DICC_VACIO       0           // Diccionario vacío
+#define DIC_VACIO        0           // Diccionario vacío
 #define NO_ENCONTRADO    0           // Clave no encontrada
 #define SIN_MEM          0           // Error por falta de memoria
 #define DUPLICADO        0           // Clave duplicada
@@ -41,7 +41,7 @@ typedef tNodo* tLista;  // Lista enlazada usada como manejo de colisiones
 
 /// Diccionario implementado como tabla hash de listas
 typedef struct {
-    tLista tabla[TAM_TABLA_HASH];  // Tabla de hash con listas
+    tLista tabla[TAM_DIC];  // Tabla de hash con listas
 } tDic;
 
 // =======================================================
