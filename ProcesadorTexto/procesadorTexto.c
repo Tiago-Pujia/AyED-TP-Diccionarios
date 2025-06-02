@@ -22,7 +22,7 @@ void acumularFrecuencia(void* existente, void* nuevo)
 /// @param param   Parámetro extra no utilizado (puede ser NULL)
 void mostrarPalabra(void* clave, void* dato, void* param)
 {
-    printf("%s: %d\n", (char*)clave, *(int*)dato);
+    printf("~ %s: %d\n", (char*)clave, *(int*)dato);
 }
 
 /// Convierte todos los caracteres de una cadena a minúsculas.
@@ -126,34 +126,6 @@ void iniEstadisticas(tEstText* estText)
     }
 }
 
-/// Muestra las estadísticas recolectadas del archivo de texto procesado.
-///
-/// Incluye:
-/// - Cantidad total de palabras
-/// - Cantidad de espacios y signos de puntuación
-/// - Podio con las palabras más frecuentes
-/// - Listado completo de palabras con sus frecuencias
-///
-/// @param estText  Estructura con estadísticas acumuladas
-/// @param dic      Diccionario con las palabras y sus repeticiones
-void mostrarEstadisticas(const tEstText* estText, const tDic* dic)
-{
-    printf("\n===== ESTADÍSTICAS DEL TEXTO =====\n");
-    printf("Cantidad total de palabras: %d\n", estText->cantPalabras);
-    printf("Cantidad de espacios y tabulaciones: %d\n", estText->cantEspacios);
-    printf("Cantidad de signos de puntuación: %d\n", estText->cantPuntuacion);
-
-    printf("\n===== TOP 5 PALABRAS MÁS USADAS =====\n");
-    for (int i = TOP_PAL - 1; i >= 0; i--)
-    {
-        if (estText->masUsadas[i][0] != '\0')  // Verifica si hay palabra almacenada
-            printf("%d. %s\n", TOP_PAL - i, estText->masUsadas[i]);
-    }
-
-    printf("\n===== TODAS LAS PALABRAS Y SUS FRECUENCIAS =====\n");
-    recorrerDic(dic, mostrarPalabra, NULL);
-}
-
 /// Genera el podio de las palabras más frecuentes en el texto.
 /// La palabra más usada quedará en la última posición del arreglo `masUsadas`.
 ///
@@ -218,4 +190,47 @@ int palabraYaEnPodio(const char* palabra, const tEstText* estText, int desdePos)
         }
     }
     return 0;  // No se encontró en el podio
+}
+
+/// Valida que el archivo especificado sea accesible, tenga extensión .txt y no esté vacío.
+///
+/// @param ruta   Ruta str del archivo a validar
+/// @param arch   Puntero al puntero de archivo donde se almacenará el FILE* abierto
+///
+/// @return 0 si es válido.
+///         1 si el archivo no existe o no se pudo abrir.
+///         2 si la extensión no es .txt.
+///         3 si el archivo está vacío.
+int validarAbrirArchTxt(const char* ruta, FILE** arch)
+{
+    FILE* archivo = fopen(ruta, "r");
+
+    // Verifica que el archivo exista y se pueda abrir
+    if (!archivo)
+    {
+        return ERROR_ARCHIVO_NO_ENCONTRADO;
+    }
+
+    // Verifica que tenga extensión .txt
+    const char* extension = strrchr(ruta, '.');
+    if (!extension || strcmp(extension, ".txt") != 0)
+    {
+        fclose(archivo);
+        return ERROR_EXTENSION_INVALIDA;
+    }
+
+    // Verifica que el archivo no esté vacío
+    fseek(archivo, 0, SEEK_END);
+    long tamanio = ftell(archivo);
+    rewind(archivo);
+
+    if (tamanio == 0)
+    {
+        fclose(archivo);
+        return ERROR_ARCHIVO_VACIO;
+    }
+
+    // Si todo está correcto, devolvemos el archivo abierto
+    *arch = archivo;
+    return EXITO;
 }
