@@ -12,10 +12,6 @@
 #define TAM_PAL 100            /// Tamaño máximo permitido para una palabra
 #define TOP_PAL 5              /// Cantidad de palabras a incluir en el podio de más usadas
 
-#define ERROR_ARCHIVO_NO_ENCONTRADO   -100
-#define ERROR_EXTENSION_INVALIDA      -200
-#define ERROR_ARCHIVO_VACIO           -300
-
 // =======================================================
 //                  MACROS UTILITARIAS
 // =======================================================
@@ -73,8 +69,5 @@ int palabraYaEnPodio(const char* palabra, const tEstText* estText, int desdePos)
 
 /// Genera el podio con las palabras más frecuentes del texto
 void generarPodioPalabras(tDic* dic, int posicion, tEstText* estText);
-
-/// Se realiza una verificación y apertura sobre el archivo enviado: Que exista, que no este vacio y que sea .txt
-int validarAbrirArchTxt(const char* ruta, FILE** arch);
 
 #endif // PROCESADORTEXTO_H_INCLUDED

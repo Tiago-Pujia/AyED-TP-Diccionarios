@@ -14,21 +14,16 @@
 #define TAM_RUTA 256    /// Tamaño máximo para la ruta del archivo ingresado
 #define TAM_LINEA 256   /// Tamaño máximo para líneas auxiliares (uso general)
 
+#define ERROR_ARCHIVO_NO_ENCONTRADO   -100
+#define ERROR_EXTENSION_INVALIDA      -200
+#define ERROR_ARCHIVO_VACIO           -300
+#define ARCHIVO_VALIDO 0
+
 // =======================================================
 //                  MENSAJES
 // =======================================================
 
-#define MSJ_CONTINUAR "\n¿Desea analizar otro archivo? (1 = SI / 0 = NO): "
-
-// =======================================================
-//                  FUNCIONES AUXILIARES
-// =======================================================
-
-/// Limpia la consola, dependiendo del sistema operativo.
-void limpiarConsola();
-
-/// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
-void leerTexto(char *texto, size_t longitud);
+#define MSJ_CONTINUAR "\n ¿Desea analizar otro archivo? Ingrese 0 para salir o cualquier letra para continuar: "
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -41,10 +36,20 @@ void iniciarAnalisisTexto();
 /// Muestra las instrucciones y descripción general del programa.
 void mostrarInstrucciones();
 
-/// Muestra un mensaje descriptivo según el tipo de error al validar un archivo.
-void mostrarValidacionArch(int tipoError);
-
 /// Muestra las estadísticas recolectadas y todas las palabras registradas
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic);
+
+/// Se realiza una verificación y apertura sobre el archivo enviado: Que exista, que no este vacio y que sea .txt
+int validarArchivoTxt(const char* ruta, FILE** arch);
+
+// =======================================================
+//                  FUNCIONES AUXILIARES
+// =======================================================
+
+/// Limpia la consola, dependiendo del sistema operativo.
+void limpiarConsola();
+
+/// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
+void leerTexto(char *texto, size_t longitud);
 
 #endif // INTERFAZUSUARIO_H_INCLUDED

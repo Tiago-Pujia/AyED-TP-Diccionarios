@@ -3,134 +3,94 @@
 #include "../ProcesadorTexto/procesadorTexto.h"
 
 // =======================================================
-//                  FUNCIONES AUXILIARES
-// =======================================================
-
-/// Limpia la consola, dependiendo del sistema operativo.
-///
-/// Compatible con:
-/// - Windows (cls)
-/// - Linux/macOS (clear)
-void limpiarConsola()
-{
-    #if defined(_WIN32) || defined(_WIN64)
-        system("cls");  // Comando para Windows
-    #elif defined(__linux__) || defined(__APPLE__) || defined(__MACH__)
-        system("clear");  // Comando para Linux/macOS
-    #else
-        puts("Sistema operativo no soportado para limpieza de consola.");
-    #endif
-}
-
-/// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
-///
-/// @param texto     Buffer donde se guarda el texto leído.
-/// @param longitud  Tamaño máximo del buffer.
-void leerTexto(char *texto, size_t longitud)
-{
-    size_t i = 0;
-    fflush(stdin);
-    fgets(texto, longitud, stdin);
-    while(texto[i] != '\0')
-        texto[i] == '\n' ? texto[i] = '\0' : i++;
-}
-
-// =======================================================
 //                  FUNCIONES PRINCIPALES
 // =======================================================
 
 /// Función principal de interacción con el usuario.
 /// Solicita la ruta del archivo, valida y procesa su contenido, y muestra resultados.
-///
-/// Flujo general:
-/// 1. Muestra las instrucciones.
-/// 2. Solicita la ruta del archivo.
-/// 3. Valida existencia, extensión y contenido.
-/// 4. Procesa el texto y genera estadísticas.
-/// 5. Muestra los resultados.
-/// 6. Libera memoria utilizada.
 void iniciarAnalisisTexto()
 {
-    char ruta[TAM_RUTA];           // Ruta ingresada por el usuario
-    FILE* arch;                    // Puntero al archivo
-    tDic dicc;                     // Diccionario de palabras
-    tEstText estadisticas;         // Estructura para estadísticas del texto
+    char ruta[TAM_RUTA];
+    FILE* arch;
+    tDic dicc;
+    tEstText estadisticas;
 
-    char continuar = 1;
-    char validacionArch;
+    int continuar = 1;
+    int validacionArch;
 
     do
     {
         limpiarConsola();
-
-        // Inicializamos el diccionario y contadores
-        crearDic(&dicc);
-        iniEstadisticas(&estadisticas);
-
-        mostrarInstrucciones();  // Instrucciones y presentación
+        mostrarInstrucciones();
 
         printf("Ingrese la ruta del archivo de texto que desea analizar:\n");
-
-        // Leemos la ruta ingresada por el usuario
         leerTexto(ruta, TAM_RUTA);
 
-        // Validamos el archivo (existe, es .txt, no está vacío)
-        if ((validacionArch = validarAbrirArchTxt(ruta, &arch)) != EXITO)
+        if ((validacionArch = validarArchivoTxt(ruta, &arch)) != ARCHIVO_VALIDO)
         {
-            mostrarValidacionArch(validacionArch);
             printf(MSJ_CONTINUAR);
             scanf("%d", &continuar);
             continue;
         }
 
-        // Procesamos el contenido del archivo y generamos estadísticas
+        crearDic(&dicc);
+        iniEstadisticas(&estadisticas);
+
         procesarArch(arch, &dicc, &estadisticas);
         generarPodioPalabras(&dicc, TOP_PAL, &estadisticas);
+
         limpiarConsola();
         mostrarEstadisticas(&estadisticas, &dicc);
 
-        vaciarDic(&dicc); // Liberamos la memoria ocupada por el diccionario
-        fclose(arch);  // Cerramos el archivo abierto
+        vaciarDic(&dicc);
+        fclose(arch);
 
         printf(MSJ_CONTINUAR);
         scanf("%d", &continuar);
 
-    } while(continuar);
+    } while(continuar != 0);
 }
 
-/// Muestra un mensaje descriptivo según el tipo de error al validar un archivo.
-/// @param tipoError Código del error:
-///        1 = No se pudo abrir,
-///        2 = Extensión inválida,
-///        3 = Archivo vacío
-void mostrarValidacionArch(int tipoError)
+/// Valida que el archivo exista, su extension sea ".txt" y que no este vacio.
+/// Si la validación es exitosa, devuelve 0 y el puntero al archivo.
+int validarArchivoTxt(const char* ruta_archivo, FILE** pArchivo)
 {
-    printf("\n[!] ERROR: ");
+    FILE* archivo = fopen(ruta_archivo, "r");
 
-    switch(tipoError)
+    // Valido que el archivo exista en la ruta ingresada
+    if(!archivo)
     {
-        case ERROR_ARCHIVO_NO_ENCONTRADO:
-            printf("El archivo no existe o no se pudo abrir.\n");
-            break;
-
-        case ERROR_EXTENSION_INVALIDA:
-            printf("El archivo debe tener extensión .txt\n");
-            break;
-
-        case ERROR_ARCHIVO_VACIO:
-            printf("El archivo está vacío. Por favor, seleccioná uno con contenido.\n");
-            break;
-
-        default:
-            printf("Error desconocido al validar el archivo.\n");
-            break;
+        printf("El archivo ingresado no existe o no fue encontrado en la ruta especificada.\n");
+        return ERROR_ARCHIVO_NO_ENCONTRADO;
     }
+
+    // Valido que el archivo tenga la extension ".txt"
+    const char* ext = strrchr(ruta_archivo, '.');
+    if (!ext || strcmp(ext, ".txt") != 0)
+    {
+        printf("Por favor ingrese un archivo de texto.\n");
+        fclose(archivo);
+        return ERROR_EXTENSION_INVALIDA;
+    }
+
+    // Valido que el archivo NO este vacio
+    fseek(archivo, 0, SEEK_END);
+    long tam = ftell(archivo);
+    rewind(archivo);
+
+    if (tam == 0)
+    {
+        printf("Por favor ingrese un archivo que no este vacio.\n");
+        fclose(archivo);
+        return ERROR_ARCHIVO_VACIO;
+    }
+
+    *pArchivo = archivo;
+
+    return ARCHIVO_VALIDO;
 }
 
 /// Muestra por consola una descripción detallada del programa y sus funcionalidades.
-///
-/// Esta función presenta al usuario qué hace el programa, cómo debe proporcionar
-/// el archivo de entrada, y qué tipo de salida puede esperar.
 void mostrarInstrucciones()
 {
     printf("============================================================\n");
@@ -167,13 +127,6 @@ void mostrarInstrucciones()
 }
 
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
-///
-/// Incluye:
-/// - Cantidad total de palabras
-/// - Cantidad de espacios y signos de puntuación
-/// - Podio con las palabras más frecuentes
-/// - Listado completo de palabras con sus frecuencias
-///
 /// @param estText  Estructura con estadísticas acumuladas
 /// @param dic      Diccionario con las palabras y sus repeticiones
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic)
@@ -200,4 +153,37 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic)
     recorrerDic(dic, mostrarPalabra, NULL);
 
     printf("============================================================\n");
+}
+
+// =======================================================
+//                  FUNCIONES AUXILIARES
+// =======================================================
+
+/// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
+///
+/// @param texto     Buffer donde se guarda el texto leído.
+/// @param longitud  Tamaño máximo del buffer.
+void leerTexto(char *texto, size_t longitud)
+{
+    size_t i = 0;
+    fflush(stdin);
+    fgets(texto, longitud, stdin);
+    while(texto[i] != '\0')
+        texto[i] == '\n' ? texto[i] = '\0' : i++;
+}
+
+/// Limpia la consola, dependiendo del sistema operativo.
+///
+/// Compatible con:
+/// - Windows (cls)
+/// - Linux/macOS (clear)
+void limpiarConsola()
+{
+    #if defined(_WIN32) || defined(_WIN64)
+        system("cls");  // Comando para Windows
+    #elif defined(__linux__) || defined(__APPLE__) || defined(__MACH__)
+        system("clear");  // Comando para Linux/macOS
+    #else
+        puts("Sistema operativo no soportado para limpieza de consola.");
+    #endif
 }
