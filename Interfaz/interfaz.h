@@ -37,7 +37,7 @@ void iniciarAnalisisTexto();
 void mostrarInstrucciones();
 
 /// Muestra las estadísticas recolectadas y todas las palabras registradas
-void mostrarEstadisticas(const tEstText* estText, const tDic* dic);
+void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio);
 
 /// Se realiza una verificación y apertura sobre el archivo enviado: Que exista, que no este vacio y que sea .txt
 int validarArchivoTxt(const char* ruta, FILE** arch);

@@ -35,8 +35,7 @@ typedef struct
     int cantPalabras;                 /// Cantidad total de palabras encontradas
     int cantEspacios;                 /// Cantidad total de espacios y tabulaciones
     int cantPuntuacion;               /// Cantidad total de signos de puntuación
-    char masUsadas[TOP_PAL][TAM_PAL]; /// Podio: palabras más frecuentes en el texto
-} tEstText;
+}tEstText;
 
 // =======================================================
 //                  FUNCIONES AUXILIARES
@@ -65,9 +64,18 @@ void trozarLinea(char* linea, tDic* dic, tEstText* estText);
 void iniEstadisticas(tEstText* estText);
 
 /// Verifica si una palabra ya está presente en el podio
-int palabraYaEnPodio(const char* palabra, const tEstText* estText, int desdePos);
+int estaEnDic(tDic* dic, const void* clave, Cmp cmp);
 
 /// Genera el podio con las palabras más frecuentes del texto
-void generarPodioPalabras(tDic* dic, int posicion, tEstText* estText);
+void generarPodioPalabras(tDic* dic, int posicion, tEstText* estText, Cmp cmp, tDic*dicPodio, Cmp cmpEnt);
+
+tNodo* buscarIgual(tDic*dic, tNodo*dato,Cmp cmp, tDic*dicPodio, Cmp cmpStr);
+tNodo* buscarMasUsada(tDic* dic, Cmp cmp, tDic* dicPodio);
+
+int comparaString(const void *a, const void *b);
+int comparaEntero(const void *a, const void *b);
+
+
+void mostrarPodioPorPosicion(tDic* dicPodio);
 
 #endif // PROCESADORTEXTO_H_INCLUDED

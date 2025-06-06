@@ -12,7 +12,7 @@ void iniciarAnalisisTexto()
 {
     char ruta[TAM_RUTA];
     FILE* arch;
-    tDic dicc;
+    tDic dicc, dicPodio;
     tEstText estadisticas;
 
     int continuar = 1;
@@ -20,7 +20,7 @@ void iniciarAnalisisTexto()
 
     do
     {
-        limpiarConsola();
+        //limpiarConsola();
         mostrarInstrucciones();
 
         printf("Ingrese la ruta del archivo de texto que desea analizar:\n");
@@ -34,13 +34,14 @@ void iniciarAnalisisTexto()
         }
 
         crearDic(&dicc);
+        crearDic(&dicPodio);
         iniEstadisticas(&estadisticas);
 
         procesarArch(arch, &dicc, &estadisticas);
-        generarPodioPalabras(&dicc, TOP_PAL, &estadisticas);
+        generarPodioPalabras(&dicc, TOP_PAL, &estadisticas,comparaString, &dicPodio, comparaEntero);
 
-        limpiarConsola();
-        mostrarEstadisticas(&estadisticas, &dicc);
+        //limpiarConsola();
+        mostrarEstadisticas(&estadisticas, &dicc, &dicPodio);
 
         vaciarDic(&dicc);
         fclose(arch);
@@ -129,7 +130,7 @@ void mostrarInstrucciones()
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
 /// @param estText  Estructura con estadísticas acumuladas
 /// @param dic      Diccionario con las palabras y sus repeticiones
-void mostrarEstadisticas(const tEstText* estText, const tDic* dic)
+void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio)
 {
     printf("============================================================\n");
     printf("                 ESTADISTICAS DEL TEXTO                     \n");
@@ -142,9 +143,8 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic)
     printf(" TOP %d PALABRAS MAS UTILIZADAS\n", TOP_PAL);
     printf("------------------------------------------------------------\n");
 
-    for (int i = TOP_PAL - 1; i >= 0; i--)
-        if (estText->masUsadas[i][0] != '\0')
-            printf(" %d. %s\n", TOP_PAL - i, estText->masUsadas[i]);
+    mostrarPodioPorPosicion(dicPodio);
+
 
     printf("\n------------------------------------------------------------\n");
     printf(" LISTADO COMPLETO DE PALABRAS Y FRECUENCIAS\n");
