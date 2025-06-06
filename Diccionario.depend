@@ -97,3 +97,35 @@
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 
+1749247833 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.c
+	"interfaz.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1749247833 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.h
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	<stdio.h>
+	<string.h>
+
+1749247164 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1749247833 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1749247833 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\main.c
+	"TDA_Diccionario/dic.h"
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+
+1749247833 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1749247164 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.c
+	"dic.h"
+
