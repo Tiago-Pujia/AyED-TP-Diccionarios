@@ -127,6 +127,7 @@ void mostrarInstrucciones()
     printf("============================================================\n\n");
 }
 
+/*
 void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
 {
     size_t puestoActual = 1;   // Puesto que se está mostrando actualmente
@@ -169,6 +170,24 @@ void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
         }
 
         puestoActual++;  // Avanza al siguiente puesto
+    }
+}
+*/
+
+void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
+{
+    size_t cantMostrado = 0;
+    size_t puesto = 1;
+
+    for (size_t i = 0; i < TAM_DIC; i++)
+    {
+        tLista lista = dicPodio->tabla[i];
+
+        while (lista)
+        {
+            printf("%d. %s\n", *(int*)lista->info, (char*)lista->clave);
+            lista = lista->sig;
+        }
     }
 }
 

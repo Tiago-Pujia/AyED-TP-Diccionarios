@@ -101,45 +101,108 @@ void iniEstadisticas(tEstText* estText)
 /// Genera el podio dinámico de las palabras más frecuentes del diccionario principal.
 /// - Inserta palabras en el diccionario `podioDic`, asignándoles un puesto numérico.
 /// - Las palabras con la misma frecuencia comparten el mismo puesto (empates).
+void generarPodioPalabras(tDic* dic, size_t cantPuestos, Cmp cmpClave, tDic *dicPodio, Cmp cmpEnt)
+{
+    tNodo* palabraMasUsada = NULL, *iguales;
+    int posicionYaUsada = 1, cantEmpate;
+
+    while(posicionYaUsada <= cantPuestos)
+    {
+        palabraMasUsada = buscarMasUsada(dic, cmpClave, dicPodio);
+
+        if(palabraMasUsada)
+        {
+            cantEmpate = 0;
+
+            inserDic(dicPodio, palabraMasUsada->clave, strlen(palabraMasUsada->clave) + 1, &posicionYaUsada, sizeof(posicionYaUsada), cmpClave, NULL);
+            iguales = buscarIgual(dic, palabraMasUsada, cmpEnt, dicPodio, cmpClave);
+
+            while(iguales)
+            {
+                inserDic(dicPodio, iguales->clave, strlen(iguales->clave) + 1, &posicionYaUsada, sizeof(posicionYaUsada), cmpClave, NULL);
+                cantEmpate++;
+                iguales = buscarIgual(dic, iguales, cmpEnt,dicPodio, cmpClave);
+
+
+            }
+
+            if(cantEmpate > 0)
+                posicionYaUsada += cantEmpate;
+        }
+        posicionYaUsada++;
+
+    }
+}
+/*
 void generarPodioPalabras(tDic* dic, int cantPuestos, Cmp cmpClaves, tDic* podioDic, Cmp cmpFrecuencias)
 {
-    int puestoActual = 1;
+    size_t puestoActual = 1;
+    size_t cantInsertado = 0;
 
     while (puestoActual <= cantPuestos)
     {
+        cantInsertado = 0;
+
         // Buscar la palabra con mayor frecuencia que aún no está en el podio
         tNodo* nodoMasFrecuente = buscarMasUsada(dic, cmpClaves, podioDic);
         if (!nodoMasFrecuente)
             break;
 
         // Insertar palabra al podio con el puesto actual
-        inserDic(podioDic,
-                 nodoMasFrecuente->clave,
-                 strlen((char*)nodoMasFrecuente->clave) + 1,
-                 &puestoActual,
-                 sizeof(int),
-                 comparaString,
-                 NULL);
+        inserDic(podioDic, nodoMasFrecuente->clave, strlen((char*)nodoMasFrecuente->clave) + 1, &puestoActual, sizeof(int), comparaString, NULL);
+
+        cantInsertado++;
 
         // Buscar y agregar otras palabras con la misma frecuencia (empates)
         tNodo* nodoEmpatado = buscarIgual(dic, nodoMasFrecuente, cmpFrecuencias, podioDic, cmpClaves);
         while (nodoEmpatado)
         {
-            inserDic(podioDic,
-                     nodoEmpatado->clave,
-                     strlen((char*)nodoEmpatado->clave) + 1,
-                     &puestoActual,
-                     sizeof(int),
-                     comparaString,
-                     NULL);
+            inserDic(podioDic, nodoEmpatado->clave, strlen((char*)nodoEmpatado->clave) + 1, &puestoActual, sizeof(int), comparaString, NULL);
 
             nodoEmpatado = buscarIgual(dic, nodoEmpatado, cmpFrecuencias, podioDic, cmpClaves);
+            cantInsertado++;
         }
 
         // Avanzar al siguiente número de puesto
-        puestoActual++;
+        puestoActual += cantInsertado;
     }
 }
+*/
+
+/*
+void generarPodioPalabras(tDic* dic, int posicion, Cmp cmp, tDic*dicPodio, Cmp cmpEnt)
+{
+    tNodo* palabraMasUsada = NULL, *iguales;
+    int posicionYaUsada = 1, cantEmpate;
+
+    while(posicionYaUsada <= posicion)
+    {
+        palabraMasUsada = buscarMasUsada(dic, cmp, dicPodio);
+
+        if(palabraMasUsada)
+        {
+            cantEmpate=0;
+
+            inserDic(dicPodio, palabraMasUsada->clave, strlen(palabraMasUsada->clave) + 1, &posicionYaUsada, sizeof(posicionYaUsada), comparaString, NULL);
+            iguales = buscarIgual(dic, palabraMasUsada, cmpEnt, dicPodio, cmp);
+
+            while(iguales)
+            {
+                inserDic(dicPodio, iguales->clave, strlen(iguales->clave) + 1, &posicionYaUsada, sizeof(posicionYaUsada), comparaString, NULL);
+                cantEmpate++;
+                iguales = buscarIgual(dic, iguales, cmpEnt,dicPodio, cmp);
+            }
+
+            if(cantEmpate > 0)
+                posicionYaUsada += cantEmpate;
+            else
+                posicionYaUsada++;
+        }
+        posicionYaUsada++;
+
+    }
+}
+*/
 
 /// Busca otra palabra en el diccionario que tenga la misma frecuencia que `dato`,
 /// y que aún no haya sido insertada en el diccionario del podio (`dicPodio`).
@@ -182,11 +245,11 @@ tNodo* buscarMasUsada(tDic* dic, Cmp cmp, tDic* dicPodio)
         while (lista)
         {
             // Verifica que la palabra aún no haya sido usada en el podio
-                // Si es la primera palabra encontrada o su frecuencia es mayor a la actual
+            // Si es la primera palabra encontrada o su frecuencia es mayor a la actual
             if (
                 ( !estaEnDic(dicPodio, lista->clave, cmp) ) &&
                 ( !palabraMasUsada || (*(int*)lista->info > *(int*)palabraMasUsada->info) )
-                )
+               )
             {
                     palabraMasUsada = lista;  // Actualiza el puntero con la nueva más usada
             }

@@ -145,16 +145,16 @@
 	<stdio.h>
 	<string.h>
 
-1749279513 z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+1749324112 z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
 	<stdio.h>
 	<string.h>
 
-1749280031 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\interfaz\interfaz.c
+1749321908 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\interfaz\interfaz.c
 	"interfaz.h"
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 
-1749279939 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+1749323559 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 

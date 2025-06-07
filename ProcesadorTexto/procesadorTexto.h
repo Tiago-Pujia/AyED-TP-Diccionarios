@@ -71,12 +71,12 @@ void iniEstadisticas(tEstText* estText);
 int estaEnDic(tDic* dic, const void* clave, Cmp cmp);
 
 /// Genera el podio con las palabras más frecuentes del texto
-void generarPodioPalabras(tDic* dic, int cantPuestos, Cmp cmpClaves, tDic* podioDic, Cmp cmpFrecuencias);
+void generarPodioPalabras(tDic* dic, size_t cantPuestos, Cmp cmpClaves, tDic* podioDic, Cmp cmpFrecuencias);
 
-tNodo* buscarIgual(tDic*dic, tNodo*dato,Cmp cmp, tDic*dicPodio, Cmp cmpStr);
+/// Busca una palabra en el diccionario que sea igual que `dato` y que no se encuentre en dicPodio
+tNodo* buscarIgual(tDic *dic, tNodo *dato,Cmp cmp, tDic *dicPodio, Cmp cmpStr);
 
+/// Busca la palabra más frecuente en el diccionario (`dic`) que aún no haya sido insertada en el podio.
 tNodo* buscarMasUsada(tDic* dic, Cmp cmp, tDic* dicPodio);
-
-
 
 #endif // PROCESADORTEXTO_H_INCLUDED
