@@ -129,3 +129,35 @@
 1749247164 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.c
 	"dic.h"
 
+1749273076 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\main.c
+	"TDA_Diccionario/dic.h"
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+
+1749273261 z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1749279484 z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\interfaz\interfaz.h
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	<stdio.h>
+	<string.h>
+
+1749279513 z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1749280031 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\interfaz\interfaz.c
+	"interfaz.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1749279939 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1749273261 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\tda_diccionario\dic.c
+	"dic.h"
+

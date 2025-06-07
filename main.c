@@ -96,6 +96,7 @@ int comparar_alumnos(const void* a, const void* b)
 
     return a1->dni - a2->dni;
 }
+
 void Imprimir_alumnos(void* a, void* params)
 {
     tAlumno* a1 = (tAlumno*)a;

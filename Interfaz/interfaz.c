@@ -20,7 +20,7 @@ void iniciarAnalisisTexto()
 
     do
     {
-        //limpiarConsola();
+        limpiarConsola();
         mostrarInstrucciones();
 
         printf("Ingrese la ruta del archivo de texto que desea analizar:\n");
@@ -38,9 +38,9 @@ void iniciarAnalisisTexto()
         iniEstadisticas(&estadisticas);
 
         procesarArch(arch, &dicc, &estadisticas);
-        generarPodioPalabras(&dicc, TOP_PAL, &estadisticas,comparaString, &dicPodio, comparaEntero);
+        generarPodioPalabras(&dicc, TOP_PAL, comparaString, &dicPodio, comparaEntero);
 
-        //limpiarConsola();
+        limpiarConsola();
         mostrarEstadisticas(&estadisticas, &dicc, &dicPodio);
 
         vaciarDic(&dicc);
@@ -127,9 +127,48 @@ void mostrarInstrucciones()
     printf("============================================================\n\n");
 }
 
+void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
+{
+    size_t puestoActual = 1;   // Puesto que se está mostrando actualmente
+    size_t puestoPalabra;      // Puesto guardado en cada nodo
+    size_t cantMostrado = 1;   // Contador total de palabras impresas
+
+    // Se continúa mientras no se hayan mostrado todas las palabras del podio
+    while (cantMostrado <= TOP_PAL)
+    {
+        printf(">> Puesto %d:\n", cantMostrado);
+
+        // Recorre todas las posiciones de la tabla hash
+        for (size_t i = 0; i < TAM_DIC; i++)
+        {
+            tLista lista = dicPodio->tabla[i];
+
+            // Recorre cada nodo de la lista
+            while (lista && cantMostrado <= TOP_PAL)
+            {
+                // FALTA MOSTRAR LA FRECUENCIA
+                //int frecuencia = 0;
+                //obtenerDic(dic, lista->clave, strlen((char*)lista->clave) + 1, &frecuencia, sizeof(frecuencia), cmp);
+
+                puestoPalabra = *(int*)lista->info;
+
+                // Si el nodo corresponde al puesto actual, se imprime
+                if (puestoPalabra == puestoActual)
+                {
+                    printf("\t- %s\n", (char*)lista->clave);
+                    //printf("\t- Frecuencia: %u - Palabra: %s\n", frecuencia, (char*)lista->clave);
+                    cantMostrado++;
+                }
+
+                lista = lista->sig;
+            }
+        }
+
+        puestoActual++;  // Avanza al siguiente puesto
+    }
+}
+
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
-/// @param estText  Estructura con estadísticas acumuladas
-/// @param dic      Diccionario con las palabras y sus repeticiones
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio)
 {
     printf("============================================================\n");
@@ -141,10 +180,9 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* di
 
     printf("\n------------------------------------------------------------\n");
     printf(" TOP %d PALABRAS MAS UTILIZADAS\n", TOP_PAL);
-    printf("------------------------------------------------------------\n");
+    printf("------------------------------------------------------------\n\n");
 
-    mostrarPodioPorPosicion(dicPodio);
-
+    mostrarPodio(dicPodio, dic, comparaEntero);
 
     printf("\n------------------------------------------------------------\n");
     printf(" LISTADO COMPLETO DE PALABRAS Y FRECUENCIAS\n");
@@ -160,7 +198,6 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* di
 // =======================================================
 
 /// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
-///
 /// @param texto     Buffer donde se guarda el texto leído.
 /// @param longitud  Tamaño máximo del buffer.
 void leerTexto(char *texto, size_t longitud)
@@ -173,10 +210,6 @@ void leerTexto(char *texto, size_t longitud)
 }
 
 /// Limpia la consola, dependiendo del sistema operativo.
-///
-/// Compatible con:
-/// - Windows (cls)
-/// - Linux/macOS (clear)
 void limpiarConsola()
 {
     #if defined(_WIN32) || defined(_WIN64)

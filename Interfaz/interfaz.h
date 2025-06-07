@@ -23,7 +23,7 @@
 //                  MENSAJES
 // =======================================================
 
-#define MSJ_CONTINUAR "\n ¿Desea analizar otro archivo? Ingrese 0 para salir o cualquier letra para continuar: "
+#define MSJ_CONTINUAR "\nDesea analizar otro archivo? Ingrese 0 para salir o cualquier letra para continuar: "
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -35,6 +35,8 @@ void iniciarAnalisisTexto();
 
 /// Muestra las instrucciones y descripción general del programa.
 void mostrarInstrucciones();
+
+void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp);
 
 /// Muestra las estadísticas recolectadas y todas las palabras registradas
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio);

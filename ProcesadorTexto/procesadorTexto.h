@@ -17,7 +17,7 @@
 // =======================================================
 
 /// Determina si un carácter es un signo de puntuación común
-#define ES_PUNTUACION(c) ((c)=='.'||(c)==','||(c)==';'||(c)=='!'||(c)=='?'||(c)==':'||(c)=='\"'||(c)=='('||(c)==')'||(c)=='-')
+#define ES_PUNTUACION(c) ( ((c) >= 33 && 47 <= (c)) || ((c) >= 58 && 63 <= (c)) || ((c) >= 91 && 96 <= (c)) || ((c) >= 123 && 126 <= (c)) )
 
 /// Determina si un carácter es una letra (mayúscula o minúscula)
 #define ES_LETRA(c) (((c)>= 'a' && (c)<= 'z') || ((c)>= 'A' && (c) <= 'Z'))
@@ -50,6 +50,10 @@ void mostrarPalabra(void* clave, void* dato, void* param);
 /// Función de acumulación: incrementa la frecuencia de una palabra
 void acumularFrecuencia(void* existente, void* nuevo);
 
+int comparaString(const void *a, const void *b);
+
+int comparaEntero(const void *a, const void *b);
+
 // =======================================================
 //                  FUNCIONES PRINCIPALES
 // =======================================================
@@ -67,15 +71,12 @@ void iniEstadisticas(tEstText* estText);
 int estaEnDic(tDic* dic, const void* clave, Cmp cmp);
 
 /// Genera el podio con las palabras más frecuentes del texto
-void generarPodioPalabras(tDic* dic, int posicion, tEstText* estText, Cmp cmp, tDic*dicPodio, Cmp cmpEnt);
+void generarPodioPalabras(tDic* dic, int cantPuestos, Cmp cmpClaves, tDic* podioDic, Cmp cmpFrecuencias);
 
 tNodo* buscarIgual(tDic*dic, tNodo*dato,Cmp cmp, tDic*dicPodio, Cmp cmpStr);
+
 tNodo* buscarMasUsada(tDic* dic, Cmp cmp, tDic* dicPodio);
 
-int comparaString(const void *a, const void *b);
-int comparaEntero(const void *a, const void *b);
 
-
-void mostrarPodioPorPosicion(tDic* dicPodio);
 
 #endif // PROCESADORTEXTO_H_INCLUDED
