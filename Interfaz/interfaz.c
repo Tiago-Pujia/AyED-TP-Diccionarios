@@ -174,22 +174,54 @@ void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
 }
 */
 
-void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
+/// Muestra el podio agrupando las palabras por número de puesto.
+/// No ordena el diccionario, simplemente agrupa la salida visualmente.
+///
+/// @param dicPodio Diccionario con las palabras del podio (clave = palabra, dato = puesto).
+/// @param dic      Diccionario original con las frecuencias (opcional para mostrar frecuencia).
+/// @param cmpClave Función de comparación de claves (palabras).
+void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmpClave)
 {
-    size_t cantMostrado = 0;
-    size_t puesto = 1;
+    int cantMostradas = 0;
+    int puesto = 1;
+    int frecuencia = 0;
 
-    for (size_t i = 0; i < TAM_DIC; i++)
+    while (cantMostradas < TOP_PAL)
     {
-        tLista lista = dicPodio->tabla[i];
+        int mostradasEnPuesto = 0;
 
-        while (lista)
+        for (size_t i = 0; i < TAM_DIC && cantMostradas < TOP_PAL; i++)
         {
-            printf("%d. %s\n", *(int*)lista->info, (char*)lista->clave);
-            lista = lista->sig;
+            tLista lista = dicPodio->tabla[i];
+
+            while (lista && cantMostradas < TOP_PAL)
+            {
+                int puestoPalabra = *(int*)lista->info;
+
+                if (puestoPalabra == puesto)
+                {
+                    obtenerDic((tDic*)dic,lista->clave,strlen((char*)lista->clave) + 1,&frecuencia,sizeof(int),cmpClave);
+
+                    if(!mostradasEnPuesto)
+                        printf(">> Puesto %d - %u Apariciones:\n", puesto, frecuencia);
+
+                    printf("   - %s\n",(char*)lista->clave);
+
+                    cantMostradas++;
+                    mostradasEnPuesto++;
+                }
+
+                lista = lista->sig;
+            }
         }
+
+        if (mostradasEnPuesto > 0)
+            printf("\n");
+
+        puesto++; // Avanza al siguiente puesto
     }
 }
+
 
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio)
