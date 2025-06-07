@@ -132,11 +132,13 @@ void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
     size_t puestoActual = 1;   // Puesto que se está mostrando actualmente
     size_t puestoPalabra;      // Puesto guardado en cada nodo
     size_t cantMostrado = 1;   // Contador total de palabras impresas
+    size_t frecuencia = 0;     // Cantidad de apariciones de una misma palabra
+    int mostrarTop;            // Variable para mostrar que puesto es y su frecuencia
 
     // Se continúa mientras no se hayan mostrado todas las palabras del podio
     while (cantMostrado <= TOP_PAL)
     {
-        printf(">> Puesto %d:\n", cantMostrado);
+        mostrarTop = 1; // Inicio un nuevo puesto
 
         // Recorre todas las posiciones de la tabla hash
         for (size_t i = 0; i < TAM_DIC; i++)
@@ -146,17 +148,19 @@ void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
             // Recorre cada nodo de la lista
             while (lista && cantMostrado <= TOP_PAL)
             {
-                // FALTA MOSTRAR LA FRECUENCIA
-                //int frecuencia = 0;
-                //obtenerDic(dic, lista->clave, strlen((char*)lista->clave) + 1, &frecuencia, sizeof(frecuencia), cmp);
-
                 puestoPalabra = *(int*)lista->info;
 
                 // Si el nodo corresponde al puesto actual, se imprime
                 if (puestoPalabra == puestoActual)
                 {
-                    printf("\t- %s\n", (char*)lista->clave);
-                    //printf("\t- Frecuencia: %u - Palabra: %s\n", frecuencia, (char*)lista->clave);
+                    if(mostrarTop)
+                    {
+                        obtenerDic(dic, lista->clave, strlen((char*)lista->clave) + 1, &frecuencia, sizeof(frecuencia), cmp);
+                        printf(">> Puesto %u - %u Apariciones:\n", cantMostrado, frecuencia);
+                        mostrarTop = 0;
+                    }
+
+                    printf("    - %s\n", (char*)lista->clave);
                     cantMostrado++;
                 }
 

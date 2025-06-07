@@ -31,21 +31,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Diccionario.c">
+		<Unit filename="Interfaz/interfaz.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Diccionario.h" />
-		<Unit filename="InterfazUsuario.c">
+		<Unit filename="Interfaz/interfaz.h" />
+		<Unit filename="ProcesadorTexto/procesadorTexto.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="InterfazUsuario.h" />
+		<Unit filename="ProcesadorTexto/procesadorTexto.h" />
+		<Unit filename="TDA_Diccionario/dic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="TDA_Diccionario/dic.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="procesadorDeTexto.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="procesadorTexto.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
