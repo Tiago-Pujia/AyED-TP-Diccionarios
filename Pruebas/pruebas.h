@@ -6,7 +6,7 @@
 #include "../ProcesadorTexto/procesadorTexto.h"
 #include "../Interfaz/interfaz.h"
 
-#define CANT_PRUEBAS 3
+#define CANT_PRUEBAS 4
 void ejecutarLoteDePruebas();
 void mostrarColisiones(tDic* dic, void (*mostrar_clave)(void*));
 void imprimir_clave(void* clave);
