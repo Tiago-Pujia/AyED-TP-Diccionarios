@@ -17,7 +17,9 @@
 // =======================================================
 
 /// Determina si un carácter es un signo de puntuación común
-#define ES_PUNTUACION(c) ( ((c) >= 33 && 47 <= (c)) || ((c) >= 58 && 63 <= (c)) || ((c) >= 91 && 96 <= (c)) || ((c) >= 123 && 126 <= (c)) )
+#define ES_PUNTUACION(c) ( ((c) >= 33 && (c)<=47) || ((c) >= 58 && (c)<=63) || \
+                          ((c) >= 91 && (c)<=96) || \
+                          ((c) >= 123 && (c)<=126))
 
 /// Determina si un carácter es una letra (mayúscula o minúscula)
 #define ES_LETRA(c) (((c)>= 'a' && (c)<= 'z') || ((c)>= 'A' && (c) <= 'Z'))
