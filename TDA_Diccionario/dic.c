@@ -69,6 +69,7 @@ int inserDic(tDic* const dic,
     memcpy(nuevo->info, dato, tamDato);
     memcpy(nuevo->clave, clave, tamClave);
     nuevo->tamInfo = tamDato;
+    nuevo->tamClave = tamClave;
 
     // Se inserta el nodo al final de la lista
     nuevo->sig = *lista; // Apunta a null

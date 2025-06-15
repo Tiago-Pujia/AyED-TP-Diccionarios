@@ -3,6 +3,7 @@
 
 #include "../TDA_Diccionario/dic.h"
 #include "../ProcesadorTexto/procesadorTexto.h"
+#include "../Lista/lista.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -39,7 +40,7 @@ void mostrarInstrucciones();
 void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp);
 
 /// Muestra las estadísticas recolectadas y todas las palabras registradas
-void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio);
+void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* listaPodio);
 
 /// Se realiza una verificación y apertura sobre el archivo enviado: Que exista, que no este vacio y que sea .txt
 int validarArchivoTxt(const char* ruta, FILE** arch);
@@ -53,5 +54,7 @@ void limpiarConsola();
 
 /// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
 void leerTexto(char *texto, size_t longitud);
+
+void imprimirPalabra(void* elem, void* param, void* v);
 
 #endif // INTERFAZUSUARIO_H_INCLUDED

@@ -1,6 +1,5 @@
 #include "interfaz.h"
-#include "../TDA_Diccionario/dic.h"
-#include "../ProcesadorTexto/procesadorTexto.h"
+
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -12,7 +11,8 @@ void iniciarAnalisisTexto()
 {
     char ruta[TAM_RUTA];
     FILE* arch;
-    tDic dicc, dicPodio;
+    tDic dicc;
+    tLista listaPodio;
     tEstText estadisticas;
 
     int continuar = 1;
@@ -34,14 +34,16 @@ void iniciarAnalisisTexto()
         }
 
         crearDic(&dicc);
-        crearDic(&dicPodio);
+
         iniEstadisticas(&estadisticas);
 
         procesarArch(arch, &dicc, &estadisticas);
-        generarPodioPalabras(&dicc, TOP_PAL, comparaString, &dicPodio, comparaEntero);
 
-        limpiarConsola();
-        mostrarEstadisticas(&estadisticas, &dicc, &dicPodio);
+        crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio);
+
+        mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
+
+        destruirLista(&listaPodio);
 
         vaciarDic(&dicc);
         fclose(arch);
@@ -65,7 +67,7 @@ int validarArchivoTxt(const char* ruta_archivo, FILE** pArchivo)
         return ERROR_ARCHIVO_NO_ENCONTRADO;
     }
 
-    // Valido que el archivo tenga la extension ".txt"
+    // Valido que el archi2vo tenga la extension ".txt"
     const char* ext = strrchr(ruta_archivo, '.');
     if (!ext || strcmp(ext, ".txt") != 0)
     {
@@ -127,104 +129,8 @@ void mostrarInstrucciones()
     printf("============================================================\n\n");
 }
 
-/*
-void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp)
-{
-    size_t puestoActual = 1;   // Puesto que se está mostrando actualmente
-    size_t puestoPalabra;      // Puesto guardado en cada nodo
-    size_t cantMostrado = 1;   // Contador total de palabras impresas
-    size_t frecuencia = 0;     // Cantidad de apariciones de una misma palabra
-    int mostrarTop;            // Variable para mostrar que puesto es y su frecuencia
-
-    // Se continúa mientras no se hayan mostrado todas las palabras del podio
-    while (cantMostrado <= TOP_PAL)
-    {
-        mostrarTop = 1; // Inicio un nuevo puesto
-
-        // Recorre todas las posiciones de la tabla hash
-        for (size_t i = 0; i < TAM_DIC; i++)
-        {
-            tLista lista = dicPodio->tabla[i];
-
-            // Recorre cada nodo de la lista
-            while (lista && cantMostrado <= TOP_PAL)
-            {
-                puestoPalabra = *(int*)lista->info;
-
-                // Si el nodo corresponde al puesto actual, se imprime
-                if (puestoPalabra == puestoActual)
-                {
-                    if(mostrarTop)
-                    {
-                        obtenerDic(dic, lista->clave, strlen((char*)lista->clave) + 1, &frecuencia, sizeof(frecuencia), cmp);
-                        printf(">> Puesto %u - %u Apariciones:\n", cantMostrado, frecuencia);
-                        mostrarTop = 0;
-                    }
-
-                    printf("    - %s\n", (char*)lista->clave);
-                    cantMostrado++;
-                }
-
-                lista = lista->sig;
-            }
-        }
-
-        puestoActual++;  // Avanza al siguiente puesto
-    }
-}
-*/
-
-/// Muestra el podio agrupando las palabras por número de puesto.
-/// No ordena el diccionario, simplemente agrupa la salida visualmente.
-///
-/// @param dicPodio Diccionario con las palabras del podio (clave = palabra, dato = puesto).
-/// @param dic      Diccionario original con las frecuencias (opcional para mostrar frecuencia).
-/// @param cmpClave Función de comparación de claves (palabras).
-void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmpClave)
-{
-    int cantMostradas = 0;
-    int puesto = 1;
-    int frecuencia = 0;
-
-    while (cantMostradas < TOP_PAL)
-    {
-        int mostradasEnPuesto = 0;
-
-        for (size_t i = 0; i < TAM_DIC && cantMostradas < TOP_PAL; i++)
-        {
-            tLista lista = dicPodio->tabla[i];
-
-            while (lista && cantMostradas < TOP_PAL)
-            {
-                int puestoPalabra = *(int*)lista->info;
-
-                if (puestoPalabra == puesto)
-                {
-                    obtenerDic((tDic*)dic,lista->clave,strlen((char*)lista->clave) + 1,&frecuencia,sizeof(int),cmpClave);
-
-                    if(!mostradasEnPuesto)
-                        printf(">> Puesto %d - %u Apariciones:\n", puesto, frecuencia);
-
-                    printf("   - %s\n",(char*)lista->clave);
-
-                    cantMostradas++;
-                    mostradasEnPuesto++;
-                }
-
-                lista = lista->sig;
-            }
-        }
-
-        if (mostradasEnPuesto > 0)
-            printf("\n");
-
-        puesto++; // Avanza al siguiente puesto
-    }
-}
-
-
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
-void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* dicPodio)
+void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* listaPodio)
 {
     printf("============================================================\n");
     printf("                 ESTADISTICAS DEL TEXTO                     \n");
@@ -237,7 +143,7 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* di
     printf(" TOP %d PALABRAS MAS UTILIZADAS\n", TOP_PAL);
     printf("------------------------------------------------------------\n\n");
 
-    mostrarPodio(dicPodio, dic, comparaEntero);
+    imprimirPodioPalabrasLista(listaPodio, TOP_PAL, cmpInfo, imprimirPalabra);
 
     printf("\n------------------------------------------------------------\n");
     printf(" LISTADO COMPLETO DE PALABRAS Y FRECUENCIAS\n");
@@ -251,6 +157,16 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic,const tDic* di
 // =======================================================
 //                  FUNCIONES AUXILIARES
 // =======================================================
+
+
+void imprimirPalabra(void* elem, void* param, void* v)
+{
+    tNodo* pal = (tNodo*)elem;
+    int* frecuencia = (int*)pal->info;
+    char* palabra = (char*)pal->clave;
+
+    printf("\t~ %s - %d aparicion(es)\n", palabra, *frecuencia);
+}
 
 /// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
 /// @param texto     Buffer donde se guarda el texto leído.

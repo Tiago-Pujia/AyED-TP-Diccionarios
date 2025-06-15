@@ -9,7 +9,7 @@
 //                  CONSTANTES GENERALES
 // =======================================================
 
-#define TAM_DIC          10          // Tamaño de la tabla hash
+#define TAM_DIC         50          // Tamaño de la tabla hash
 #define CONST_HASH     5947          // Constante utilizada en la función hash
 
 #define EXITO            1           // Operación exitosa
@@ -18,7 +18,8 @@
 #define SIN_MEM          0           // Error por falta de memoria
 #define DUPLICADO        0           // Clave duplicada
 #define ERROR            0           // Error genérico
-
+#define LISTA_VACIA      0
+#define LISTA_LLENA      0
 // =======================================================
 //                  MACROS UTILITARIAS
 // =======================================================
@@ -33,6 +34,7 @@
 typedef struct sNodo {
     void* info;         // Información almacenada
     void* clave;        // Clave asociada
+    size_t tamClave;
     size_t tamInfo;     // Tamaño de la información
     struct sNodo* sig;  // Siguiente nodo en la lista
 } tNodo;
