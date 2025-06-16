@@ -97,36 +97,35 @@
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 
-1749247833 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.c
+1749945809 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.c
 	"interfaz.h"
-	"../TDA_Diccionario/dic.h"
-	"../ProcesadorTexto/procesadorTexto.h"
 
-1749247833 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.h
+1749944933 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.h
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
+	"../Lista/lista.h"
 	<stdio.h>
 	<string.h>
 
-1749247164 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.h
+1749944933 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1749247833 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+1749946725 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
 	<stdio.h>
 	<string.h>
 
-1749247833 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\main.c
-	"TDA_Diccionario/dic.h"
+1749944933 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\main.c
 	"Interfaz/interfaz.h"
 	"ProcesadorTexto/procesadorTexto.h"
+	"Pruebas/pruebas.h"
 
-1749247833 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+1749944933 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 
-1749247164 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.c
+1749944933 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.c
 	"dic.h"
 
 1749273076 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\main.c
@@ -160,4 +159,115 @@
 
 1749273261 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\ayed-tp-diccionarios\tda_diccionario\dic.c
 	"dic.h"
+
+1749942174 source:c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\main.c
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+	"Pruebas/pruebas.h"
+
+1749942484 c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.h
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Lista/lista.h"
+	<stdio.h>
+	<string.h>
+
+1749742624 c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1749668826 c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1749942625 c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\pruebas\pruebas.h
+	"stdio.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Interfaz/interfaz.h"
+	"../Lista/lista.h"
+
+1749942692 source:c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1749942686 source:c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\pruebas\pruebas.c
+	"pruebas.h"
+
+1749942468 source:c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\interfaz\interfaz.c
+	"interfaz.h"
+
+1749742548 source:c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\tda_diccionario\dic.c
+	"dic.h"
+
+1749942475 c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\lista\lista.h
+	"../TDA_Diccionario/dic.h"
+
+1749942451 source:c:\users\leafnoise\documents\ornella\algoritmos y estructuras de datos\ayed-tp-diccionarios\lista\lista.c
+	"lista.h"
+
+1749944933 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\lista\lista.h
+	"../TDA_Diccionario/dic.h"
+
+1749946688 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\lista\lista.c
+	"lista.h"
+
+1749944933 c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\pruebas\pruebas.h
+	"stdio.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Interfaz/interfaz.h"
+	"../Lista/lista.h"
+
+1749944933 source:c:\users\orneb\onedrive\documentos\universidad\materias\algoritmos y estructuras de datos\ayed-tp-diccionarios\pruebas\pruebas.c
+	"pruebas.h"
+
+1750098854 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\interfaz\interfaz.c
+	"interfaz.h"
+	"../TDA_Diccionario/dic.h"
+
+1750098854 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\interfaz\interfaz.h
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Lista/lista.h"
+	<stdio.h>
+	<string.h>
+
+1750095384 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750097500 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1750098808 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\lista\lista.h
+	"../TDA_Diccionario/dic.h"
+
+1750098793 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\lista\lista.c
+	"lista.h"
+
+1750097263 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\main.c
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+	"Pruebas/pruebas.h"
+
+1750095384 c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\pruebas\pruebas.h
+	"stdio.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Interfaz/interfaz.h"
+	"../Lista/lista.h"
+
+1750097263 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1750095384 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\pruebas\pruebas.c
+	"pruebas.h"
+
+1750097405 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios\ayed-tp-diccionarios\tda_diccionario\dic.c
+	"../TDA_Diccionario/dic.h"
 

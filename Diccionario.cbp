@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="--testing" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -35,10 +36,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Interfaz/interfaz.h" />
+		<Unit filename="Lista/lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Lista/lista.h" />
 		<Unit filename="ProcesadorTexto/procesadorTexto.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ProcesadorTexto/procesadorTexto.h" />
+		<Unit filename="Pruebas/pruebas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pruebas/pruebas.h" />
 		<Unit filename="TDA_Diccionario/dic.c">
 			<Option compilerVar="CC" />
 		</Unit>

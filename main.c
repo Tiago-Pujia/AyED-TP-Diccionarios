@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-    int test = 0;
+    int test = 1;
 
     for(int i=1; i<argc; i++)
         test = !strcmp(argv[i], "--testing") ? 1 : 0;
