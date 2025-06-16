@@ -9,7 +9,7 @@
 //                  CONSTANTES GENERALES
 // =======================================================
 
-#define TAM_DIC         50          // Tamaño de la tabla hash
+#define TAM_DIC          10          // Tamaño de la tabla hash
 #define CONST_HASH     5947          // Constante utilizada en la función hash
 
 #define EXITO            1           // Operación exitosa

@@ -1,4 +1,4 @@
-#include "dic.h"
+#include "../TDA_Diccionario/dic.h"
 
 // Inicializa la tabla del diccionario en cero (listas vacías)
 void crearDic(tDic* const dic)
