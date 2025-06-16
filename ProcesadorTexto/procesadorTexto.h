@@ -46,15 +46,12 @@ typedef struct
 /// Convierte una cadena de caracteres a minúsculas
 void strToLower(char* str);
 
-/// Muestra una palabra y su frecuencia (usado por recorrerDic)
-void mostrarPalabra(void* clave, void* dato, void* param);
 
 /// Función de acumulación: incrementa la frecuencia de una palabra
 void acumularFrecuencia(void* existente, void* nuevo);
 
 int comparaString(const void *a, const void *b);
 
-int comparaEntero(const void *a, const void *b);
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -69,16 +66,5 @@ void trozarLinea(char* linea, tDic* dic, tEstText* estText);
 /// Inicializa todos los contadores de estadísticas y limpia el podio
 void iniEstadisticas(tEstText* estText);
 
-/// Verifica si una palabra ya está presente en el podio
-int estaEnDic(tDic* dic, const void* clave, Cmp cmp);
-
-/// Genera el podio con las palabras más frecuentes del texto
-void generarPodioPalabras(tDic* dic, size_t cantPuestos, Cmp cmpClaves, tDic* podioDic, Cmp cmpFrecuencias);
-
-/// Busca una palabra en el diccionario que sea igual que `dato` y que no se encuentre en dicPodio
-tNodo* buscarIgual(tDic *dic, tNodo *dato,Cmp cmp, tDic *dicPodio, Cmp cmpStr);
-
-/// Busca la palabra más frecuente en el diccionario (`dic`) que aún no haya sido insertada en el podio.
-tNodo* buscarMasUsada(tDic* dic, Cmp cmp, tDic* dicPodio);
 
 #endif // PROCESADORTEXTO_H_INCLUDED

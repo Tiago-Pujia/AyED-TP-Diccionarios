@@ -10,10 +10,6 @@ void acumularFrecuencia(void* existente, void* nuevo)
     (*(int*)existente)++;
 }
 
-void mostrarPalabra(void* clave, void* dato, void* param)
-{
-    printf("~ %s: %d\n", (char*)clave, *(int*)dato);
-}
 
 void strToLower(char* str)
 {
@@ -29,10 +25,6 @@ int comparaString(const void *a, const void *b)
     return strcmp((char*)a, (char*)b);
 }
 
-int comparaEntero(const void *a, const void *b)
-{
-    return *(int*)a - *(int*)b;
-}
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -97,3 +89,6 @@ void iniEstadisticas(tEstText* estText)
     estText->cantEspacios = 0;
     estText->cantPuntuacion = 0;
 }
+
+
+
