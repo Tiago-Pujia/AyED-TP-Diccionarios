@@ -8,17 +8,15 @@
 /// - Mostrar las colisiones en la tabla hash de forma clara.
 ///
 /// Cada archivo es procesado por separado: se inicializa el diccionario, se leen las palabras,
-/// se generan estadisticas y luego se imprimen las colisiones que ocurrieron durante la insercion.
+/// se generan estad�sticas y luego se imprimen las colisiones que ocurrieron durante la inserci�n.
 
 void ejecutarLoteDePruebas() {
-    char* archivosDePrueba[CANT_PRUEBAS] =
-    {
-        "./Pruebas/ArchivosDePrueba/texto_largo.txt",
-        "./Pruebas/ArchivosDePrueba/texto_corto.txt",
-        "./Pruebas/ArchivosDePrueba/palabras_repetidas.txt",
-        "./Pruebas/ArchivosDePrueba/palabra_frecuente.txt"
+    char* archivosDePrueba[CANT_PRUEBAS] = {
+        "./Pruebas/ArchivosDePrueba/largo.txt",
+        "./Pruebas/ArchivosDePrueba/hola.txt",
+        "./Pruebas/ArchivosDePrueba/repetidas.txt",
+        "./Pruebas/ArchivosDePrueba/cuento.txt"
     };
-
     tDic dicc;
     tLista listaPodio;
     tEstText estadisticas;
@@ -35,12 +33,13 @@ void ejecutarLoteDePruebas() {
 
         crearDic(&dicc);
         iniEstadisticas(&estadisticas);
+
         procesarArch(arch, &dicc, &estadisticas);
 
         crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio);
 
         mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
-        mostrarColisiones(&dicc, imprimirClave);
+        mostrarColisiones(&dicc, imprimir_clave);
 
         destruirLista(&listaPodio);
         vaciarDic(&dicc);
@@ -50,15 +49,13 @@ void ejecutarLoteDePruebas() {
     }
 }
 
+
 // Muestra todas las claves del diccionario que generaron colisiones.
-// Recorre la tabla hash e imprime las claves en listas con mas de un nodo.
+// Recorre la tabla hash e imprime las claves en listas con m�s de un nodo.
 void mostrarColisiones(tDic* dic, void (*mostrar_clave)(void*))
 {
     tNodo* nodo;
 
-    printf("\n------------------------------------------------------------\n");
-    printf(" COLISIONES OCASIONADAS EN EL DICCIONARIO \n");
-    printf("------------------------------------------------------------\n");
     for (int i = 0; i < TAM_DIC; i++)
     {
         nodo = dic->tabla[i];
@@ -66,6 +63,7 @@ void mostrarColisiones(tDic* dic, void (*mostrar_clave)(void*))
         {
             continue; // Posicion vacia
         }
+
 
         printf("Posicion %d:", i);
         while (nodo)
@@ -79,7 +77,7 @@ void mostrarColisiones(tDic* dic, void (*mostrar_clave)(void*))
     }
 }
 
-void imprimirClave(void* clave)
+void imprimir_clave(void* clave)
 {
     char* c = clave;
     printf("(%s)", c);
