@@ -37,7 +37,10 @@ void iniciarAnalisisTexto();
 /// Muestra las instrucciones y descripción general del programa.
 void mostrarInstrucciones();
 
-void mostrarPodio(const tDic *dicPodio, const tDic *dic, Cmp cmp);
+/// Muestra una palabra y su frecuencia (usado por recorrerDic e imprimirPodioPalabrasLista)
+
+void imprimirPalabra(void* clave, void* info, void* param);
+
 
 /// Muestra las estadísticas recolectadas y todas las palabras registradas
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* listaPodio);
@@ -55,6 +58,5 @@ void limpiarConsola();
 /// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
 void leerTexto(char *texto, size_t longitud);
 
-void imprimirPalabra(void* elem, void* param, void* v);
 
 #endif // INTERFAZUSUARIO_H_INCLUDED

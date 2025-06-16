@@ -1,5 +1,5 @@
 #include "interfaz.h"
-
+#include "../TDA_Diccionario/dic.h"
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -39,6 +39,8 @@ void iniciarAnalisisTexto()
 
         procesarArch(arch, &dicc, &estadisticas);
 
+        limpiarConsola();
+
         crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio);
 
         mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
@@ -67,7 +69,7 @@ int validarArchivoTxt(const char* ruta_archivo, FILE** pArchivo)
         return ERROR_ARCHIVO_NO_ENCONTRADO;
     }
 
-    // Valido que el archi2vo tenga la extension ".txt"
+    // Valido que el archivo tenga la extension ".txt"
     const char* ext = strrchr(ruta_archivo, '.');
     if (!ext || strcmp(ext, ".txt") != 0)
     {
@@ -132,6 +134,8 @@ void mostrarInstrucciones()
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* listaPodio)
 {
+    int modoLista = 0;
+    int modoPodio = 1;
     printf("============================================================\n");
     printf("                 ESTADISTICAS DEL TEXTO                     \n");
     printf("============================================================\n");
@@ -143,13 +147,13 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* lista
     printf(" TOP %d PALABRAS MAS UTILIZADAS\n", TOP_PAL);
     printf("------------------------------------------------------------\n\n");
 
-    imprimirPodioPalabrasLista(listaPodio, TOP_PAL, cmpInfo, imprimirPalabra);
+    imprimirPodioPalabrasLista(listaPodio, TOP_PAL, cmpInfo, imprimirPalabra, &modoPodio);
 
     printf("\n------------------------------------------------------------\n");
     printf(" LISTADO COMPLETO DE PALABRAS Y FRECUENCIAS\n");
     printf("------------------------------------------------------------\n");
 
-    recorrerDic(dic, mostrarPalabra, NULL);
+    recorrerDic(dic, imprimirPalabra, &modoLista);
 
     printf("============================================================\n");
 }
@@ -159,14 +163,7 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* lista
 // =======================================================
 
 
-void imprimirPalabra(void* elem, void* param, void* v)
-{
-    tNodo* pal = (tNodo*)elem;
-    int* frecuencia = (int*)pal->info;
-    char* palabra = (char*)pal->clave;
 
-    printf("\t~ %s - %d aparicion(es)\n", palabra, *frecuencia);
-}
 
 /// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
 /// @param texto     Buffer donde se guarda el texto leído.
@@ -190,4 +187,18 @@ void limpiarConsola()
     #else
         puts("Sistema operativo no soportado para limpieza de consola.");
     #endif
+}
+
+
+void imprimirPalabra(void* clave, void* info, void* param)
+{
+    int* frecuencia = (int*)info;
+    char* palabra = (char*)clave;
+
+    int modo = param ? *(int*)param : 0;
+
+    if(modo == 0)
+        printf("~ %s: %d\n", palabra, *frecuencia);
+    else
+        printf("\t~ %s - %d apariciones\n", palabra, *frecuencia);
 }
