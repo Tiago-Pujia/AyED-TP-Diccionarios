@@ -1,6 +1,6 @@
 # Indice
 
-- [Indice](#indice)
+- [⚙️ Ejecución del programa](#️-ejecución-del-programa)
 - [📦 TDA DICCIONARIO](#-tda-diccionario)
   - [📄 Lista de archivos](#-lista-de-archivos)
   - [🧠 ¿Qué es el TDA Diccionario?](#-qué-es-el-tda-diccionario)
@@ -13,11 +13,19 @@
     - [❌ 5. Eliminación (sacarDic)](#-5-eliminación-sacardic)
     - [🔄 6. Recorrido (recorrerDic)](#-6-recorrido-recorrerdic)
     - [🧩 7. Genérico y reutilizable](#-7-genérico-y-reutilizable)
+- [🧾 TDA Lista](#-tda-lista)
+  - [⚙️ Estructura y primitivas](#️-estructura-y-primitivas-1)
+  - [🧠 Flujo de Ejecución](#-flujo-de-ejecución-1)
+    - [🧱 1. Crear una lista desde el diccionario](#-1-crear-una-lista-desde-el-diccionario)
+    - [🔽 2. Inserción ordenada descendente](#-2-inserción-ordenada-descendente)
+    - [🏆 3. Impresión del podio](#-3-impresión-del-podio)
+    - [🧹 4. Liberación de memoria](#-4-liberación-de-memoria)
+    - [⚖️ 5. Comparación auxiliar](#-5-comparación-auxiliar)
 - [📁 Procesador de Texto](#-procesador-de-texto)
   - [📄 Lista de Archivos](#-lista-de-archivos-1)
   - [🧠 ¿Qué es este Procesador de Texto?](#-qué-es-este-procesador-de-texto)
-  - [⚙️ Estructura y Primitivas](#️-estructura-y-primitivas-1)
-  - [🧠 Flujo de Ejecución](#-flujo-de-ejecución-1)
+  - [⚙️ Estructura y Funciones](#️-estructura-y-funciones)
+  - [🧠 Flujo de Ejecución](#-flujo-de-ejecución-2)
     - [📥 1. Lectura del archivo (procesarArch)](#-1-lectura-del-archivo-procesararch)
     - [✂️ 2. Trozado de la línea (trozarLinea)](#️-2-trozado-de-la-línea-trozarlinea)
     - [🧠 3. Almacenamiento en el diccionario (trozarLinea)](#-3-almacenamiento-en-el-diccionario-trozarlinea)
@@ -26,21 +34,39 @@
 - [🧩 Interfaz](#-interfaz)
   - [📄 Lista de Archivos](#-lista-de-archivos-2)
   - [🧠 ¿Qué es y para qué sirve el módulo Interfaz?](#-qué-es-y-para-qué-sirve-el-módulo-interfaz)
-  - [⚙️ Primitivas](#️-primitivas)
-  - [Flujo de Ejecución](#flujo-de-ejecución)
+  - [⚙️ Funciones](#️-funciones)
+  - [Flujo de Ejecución](#flujo-de-ejecución-3)
     - [🪧 1. Muestra las instrucciones iniciales (mostrarInstrucciones)](#-1-muestra-las-instrucciones-iniciales-mostrarinstrucciones)
     - [🧾 2. Solicita la ruta del archivo (iniciarAnalisisTexto)](#-2-solicita-la-ruta-del-archivo-iniciaranalisistexto)
     - [🛡️ 3. Valida el archivo (validarArchivoTxt)](#️-3-valida-el-archivo-validararchivotxt)
     - [🔁 4. Coordina el procesamiento (iniciarAnalisisTexto)](#-4-coordina-el-procesamiento-iniciaranalisistexto)
     - [🧹 5. Libera recursos](#-5-libera-recursos)
-  - [📚 Créditos y Referencias](#-créditos-y-referencias)
+- [🧪 Módulo de Pruebas](#-módulo-de-pruebas)
+  - [⚙️ Estructura y funciones](#️-estructura-y-funciones-1)
+  - [🧠 Flujo de Ejecución](#-flujo-de-ejecución-4)
+    - [📁 1. Ejecución del lote de pruebas](#-1-ejecución-del-lote-de-pruebas)
+    - [🔍 2. Visualización de colisiones](#-2-visualización-de-colisiones)
+    - [🔠 3. Impresión de claves](#-3-impresión-de-claves)
+    - [📦 Archivos utilizados en las pruebas](#-archivos-utilizados-en-las-pruebas)
+- [📚 Créditos y Referencias](#-créditos-y-referencias)
     - [👨‍💻 Autores del proyecto](#-autores-del-proyecto)
     - [👩‍🏫 Docentes responsables](#-docentes-responsables)
     - [🔗 Bibliografía y fuentes consultadas](#-bibliografía-y-fuentes-consultadas)
 
 ---
 
+## ⚙️ Ejecución del programa
+
+El proyecto puede ejecutarse en dos modos distintos: **modo interactivo** (por defecto) y **modo de pruebas** (usando la flag `--testing`).
+
+### ▶️ Modo interactivo
+Para ejecutar el modo interactivo, simplemente corra el programa sin ingresar ningún argumento. Verá en la pantalla las instrucciones para su uso. 
+
+### ▶️ Modo testing
+Para ejecutar los lotes de prueba, envíe a main el argumento `--testing`. Se ejecutarán 4 lotes de prueba y se mostrarán los resultados en la consola.
+
 # 📦 TDA DICCIONARIO
+
 
 ## 📄 Lista de archivos
 
@@ -190,6 +216,75 @@ El TDA no depende del tipo de clave o valor porque:
 
 ---
 
+## 🧾 TDA Lista
+
+
+
+El TDA **Lista** implementa una **lista enlazada simple** reutilizando los nodos del TDA Diccionario, con el objetivo principal de construir un **podio de palabras más utilizadas** y mostrarlas por consola.
+
+Este módulo:
+
+- Toma los datos del diccionario.
+- Los inserta ordenados de mayor a menor.
+- Imprime el top N con empates.
+- Libera memoria al finalizar.
+
+### ⚙️ Estructura y primitivas
+
+```c
+typedef struct sNodo {
+    void* clave;
+    void* info;
+    size_t tamInfo;
+    size_t tamClave;
+    struct sNodo* sig;
+} tNodo;
+
+typedef tNodo* tLista;
+```
+
+| Función                      | Descripción                                             |
+| ---------------------------- | ------------------------------------------------------- |
+| `crearListaDesdeDicc`        | Genera lista ordenada descendente desde el diccionario. |
+| `insElemOrdenadoDesc`        | Inserta nodo en orden descendente.                      |
+| `imprimirPodioPalabrasLista` | Imprime top N palabras, respetando empates.             |
+| `destruirLista`              | Libera la memoria dinámica usada.                       |
+| `cmpInfo`                    | Compara enteros (frecuencias).                          |
+
+### 🧠 Flujo de Ejecución
+
+#### 🧱 1. Crear una lista desde el diccionario
+
+```c
+void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaPodio);
+```
+
+#### 🔽 2. Inserción ordenada descendente
+
+```c
+int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp);
+```
+
+#### 🏆 3. Impresión del podio
+
+```c
+void imprimirPodioPalabrasLista(tLista* lista, int n, Cmp cmp, Accion imprimirPalabra);
+```
+
+#### 🧹 4. Liberación de memoria
+
+```c
+void destruirLista(tLista* lista);
+```
+
+#### ⚖️ 5. Comparación auxiliar
+
+```c
+int cmpInfo(const void* e1, const void* e2);
+```
+
+---
+
 # 📁 Procesador de Texto
 
 ## 📄 Lista de Archivos
@@ -212,7 +307,7 @@ El **Procesador de Texto** es un módulo diseñado para analizar el contenido de
 - ✅ La **frecuencia exacta** de cada palabra utilizada.
 - ✅ Cuáles son las **palabras más repetidas** (top 5).
 
-## ⚙️ Estructura y Primitivas
+## ⚙️ Estructura y Funciones
 
 El módulo utiliza una estructura llamada `tEstText` (abreviatura de "Estadísticas de Texto"), que actúa como acumulador de datos globales mientras se procesa el archivo.
 
@@ -336,7 +431,7 @@ Es responsable de:
 - Encadenar las funciones del TDA Diccionario y del Procesador de Texto para ejecutar el análisis.
 - Mostrar la salida de forma clara al usuario por consola.
 
-## ⚙️ Primitivas
+## ⚙️ Funciones
 
 | Función                   | Descripción                                                                                                                  |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------|
@@ -418,6 +513,56 @@ Una vez finalizado el análisis:
 
 ---
 
+## 🧪 Módulo de Pruebas
+
+
+
+Este módulo se ejecuta automáticamente al iniciar el programa con la flag `--testing`. Permite verificar el funcionamiento completo del sistema con 4 archivos de prueba.
+
+Evalúa:
+
+- Diccionario genérico.
+- Procesamiento de texto.
+- Estadísticas.
+- Construcción e impresión del podio.
+- Visualización de colisiones en la tabla hash.
+
+### ⚙️ Estructura y funciones
+
+| Función                 | Descripción                                       |
+| ----------------------- | ------------------------------------------------- |
+| `ejecutarLoteDePruebas` | Ejecuta las 4 pruebas automáticas.                |
+| `mostrarColisiones`     | Muestra claves que colisionaron en la tabla hash. |
+| `imprimirClave`         | Imprime una clave (char\*).                       |
+
+### 🧠 Flujo de Ejecución
+
+#### 📁 1. Ejecución del lote de pruebas
+
+```c
+void ejecutarLoteDePruebas();
+```
+
+#### 🔍 2. Visualización de colisiones
+
+```c
+void mostrarColisiones(tDic* dic, void (*mostrar_clave)(void*));
+```
+
+#### 🔠 3. Impresión de claves
+
+```c
+void imprimirClave(void* clave);
+```
+
+### 📦 Archivos utilizados en las pruebas
+
+/Pruebas/ArchivosDePrueba/
+├── texto_largo.txt
+├── texto_corto.txt
+├── palabras_repetidas.txt
+└── palabra_frecuente.txt
+
 ## 📚 Créditos y Referencias
 
 ### 👨‍💻 Autores del proyecto
@@ -431,7 +576,7 @@ Este trabajo práctico fue realizado por alumnos de la carrera **Ingeniería en 
 - ✏️ Bautista Rios de Gaeta
 - ✏️ Ornella Bonachera
 
-📆 **Fecha de entrega:** Junio 2025
+📆 **Fecha de entrega:** 9 de Junio 2025
 
 🧑‍🏫 **Comisión:** 01-1900 | Cuatrimestre 1C
 
@@ -444,6 +589,5 @@ Este trabajo práctico fue realizado por alumnos de la carrera **Ingeniería en 
 ### 🔗 Bibliografía y fuentes consultadas
 
 - [Wikipedia](https://es.wikipedia.org/wiki/Tabla_hash)
-- [ChatGpt](https://chatgpt.com/)
 - [Contenido de Miel](https://drive.google.com/drive/folders/1oXcMnT-veOcgrTkaG9UGqrK3YF5J0hvY?usp=drive_link)
 - [Stack Overflow](https://stackoverflow.com/)
