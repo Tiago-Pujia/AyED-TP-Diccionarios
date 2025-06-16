@@ -1,62 +1,56 @@
 #include "lista.h"
 
-/// Libera la memoria ocupada por toda la lista enlazada
+void crearLista(tLista* lista)
+{
+    *lista = NULL;
+}
+
 void destruirLista(tLista* lista)
 {
-    if (*lista == NULL)
+    if(*lista == NULL)
         return;
 
     tNodo* nodoElim;
-    while (*lista)
+    while(*lista)
     {
         nodoElim = *lista;
         *lista = nodoElim->sig;
-
-        // Liberar memoria del nodo
-        free(nodoElim->info);   // Libera contenido dinámico copiado
-        free(nodoElim->clave);  // Libera clave copiada
-        free(nodoElim);         // Libera el nodo en sí
+        free(nodoElim->info);
+        free(nodoElim->clave);
+        free(nodoElim);
     }
 }
 
-/// Crea una nueva lista enlazada a partir del contenido de un diccionario (tabla hash)
-/// Copia los nodos de cada posición de la tabla, ordenándolos con la función cmp
-void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaPodio)
+void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada)
 {
     tLista listaDicc;
-    *listaPodio= NULL;
+    *listaCreada = NULL;
 
     for (int i = 0; i < TAM_DIC; i++)
     {
         listaDicc = dic->tabla[i];
 
-        // Recorre cada nodo de la lista de esta posición
         while (listaDicc)
         {
-            insElemOrdenadoDesc(listaPodio, listaDicc, cmp);  // Inserta ordenado
+            insElemOrdenadoDesc(listaCreada, listaDicc, cmp);
             listaDicc = listaDicc->sig;
         }
     }
 }
 
-/// Inserta un nuevo nodo en la lista en forma descendente según cmp
-/// Clona el nodo original (clave e info) y lo inserta en la nueva lista
 int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp)
 {
     tNodo* nuevo;
 
-    // Reservamos memoria para el nuevo nodo
     if (!(nuevo = (tNodo*)malloc(sizeof(tNodo))))
         return SIN_MEM;
 
-    // Reservamos memoria para la info
     if (!(nuevo->info = malloc(nodo->tamInfo)))
     {
         free(nuevo);
         return SIN_MEM;
     }
 
-    // Reservamos memoria para la clave
     if (!(nuevo->clave = malloc(nodo->tamClave)))
     {
         free(nuevo->info);
@@ -64,25 +58,43 @@ int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp)
         return SIN_MEM;
     }
 
-    // Copiamos los datos desde el nodo original
     memcpy(nuevo->info, nodo->info, nodo->tamInfo);
     memcpy(nuevo->clave, nodo->clave, nodo->tamClave);
     nuevo->tamInfo = nodo->tamInfo;
     nuevo->tamClave = nodo->tamClave;
 
-    // Buscamos la posición adecuada (orden descendente)
     while (*lista && cmp(nodo->info, (*lista)->info) < 0)
         lista = &(*lista)->sig;
 
-    // Insertamos el nuevo nodo en la lista
     nuevo->sig = *lista;
     *lista = nuevo;
 
     return EXITO;
 }
 
-/// Imprime el podio de las palabras más usadas (top n), mostrando empates
-void imprimirPodioPalabrasLista(tLista* lista, int n, Cmp cmp, Accion imprimirPalabra)
+int recorrerLista(tLista* lista, Accion accion)
+{
+    if(!*lista)
+        return LISTA_VACIA;
+
+    while(*lista)
+    {
+        accion(*lista, NULL, NULL);
+        lista = &(*lista)->sig;
+    }
+
+    return EXITO;
+}
+
+int  cmpInfo(const void* e1, const void* e2)
+{
+    int va = *(int*)e1;
+    int vb = *(int*)e2;
+
+    return va - vb;
+}
+
+void imprimirPodioPalabrasLista(tLista* lista, int n, Cmp cmp, Accion accion, void*param)
 {
     if (!lista || !*lista)
         return;
@@ -90,36 +102,28 @@ void imprimirPodioPalabrasLista(tLista* lista, int n, Cmp cmp, Accion imprimirPa
     int totalMostradas = 0;
     int puesto = 1;
 
-    while (*lista && totalMostradas < n)
+    while(*lista && totalMostradas < n)
     {
         printf(">> Puesto %d:\n", puesto);
 
         void* valorActual = (*lista)->info;
         int palabrasEnPuesto = 0;
 
-        // Imprime todas las palabras empatadas en el mismo puesto
+        // Imprimir todas las palabras empatadas en este puesto
         do
         {
-            imprimirPalabra(*lista, NULL, NULL);
+            accion((*lista)->clave, (*lista)->info, param); //se imprime la palabra
             totalMostradas++;
             palabrasEnPuesto++;
             lista = &(*lista)->sig;
         }
-        while (*lista && cmp(valorActual, (*lista)->info) == 0);
+        while(*lista && cmp(valorActual, (*lista)->info) == 0);
 
-        puesto += palabrasEnPuesto;
+        puesto += palabrasEnPuesto; //para avanzar x cantidad de palabras que ocuparon un mismo puesto
 
-        // Detiene si ya imprimió n o más palabras
-        if (totalMostradas >= n)
+        // Si ya tenemos n o más palabras, cortamos
+        if(totalMostradas >= n)
             break;
     }
 }
 
-
-/// Compara dos elementos por su información
-int cmpInfo(const void* e1, const void* e2)
-{
-    int elem1 = *(int*)e1;
-    int elem2 = *(int*)e2;
-    return elem1 - elem2;
-}
