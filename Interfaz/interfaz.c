@@ -12,7 +12,7 @@ void iniciarAnalisisTexto()
     char ruta[TAM_RUTA];
     FILE* arch;
     tDic dicc;
-    tLista listaPodio;
+    tLista listaPodio=NULL;
     tEstText estadisticas;
 
     int continuar = 1;
@@ -41,7 +41,7 @@ void iniciarAnalisisTexto()
 
         limpiarConsola();
 
-        crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio);
+        crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio, sizeof(int));
 
         mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
 

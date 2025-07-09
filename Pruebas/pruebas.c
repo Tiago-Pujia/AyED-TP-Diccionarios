@@ -36,7 +36,7 @@ void ejecutarLoteDePruebas() {
 
         procesarArch(arch, &dicc, &estadisticas);
 
-        crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio);
+        crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio, sizeof(int));
 
         mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
         mostrarColisiones(&dicc, imprimir_clave);

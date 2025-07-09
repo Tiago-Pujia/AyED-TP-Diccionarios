@@ -21,21 +21,30 @@ void destruirLista(tLista* lista)
     }
 }
 
-void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada)
+void _crearListaDesdeDicc(void* clave, void* info, void* ctx)
 {
-    tLista listaDicc;
+    ParamCrearLista* param = (ParamCrearLista*)ctx;
+
+    tNodo nodoTemp;
+    nodoTemp.clave = clave;
+    nodoTemp.info = info;
+    nodoTemp.tamClave = strlen((char*)clave) + 1;;
+    nodoTemp.tamInfo = param->tamInfo;
+    nodoTemp.sig = NULL;
+
+    insElemOrdenadoDesc(param->lista, &nodoTemp, param->cmp);
+}
+void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo)
+{
+    ParamCrearLista param;
+
     *listaCreada = NULL;
 
-    for (int i = 0; i < TAM_DIC; i++)
-    {
-        listaDicc = dic->tabla[i];
+    param.lista = listaCreada;
+    param.cmp = cmp;
+    param.tamInfo = tamInfo;
 
-        while (listaDicc)
-        {
-            insElemOrdenadoDesc(listaCreada, listaDicc, cmp);
-            listaDicc = listaDicc->sig;
-        }
-    }
+    recorrerDic(dic, _crearListaDesdeDicc, &param);
 }
 
 int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp)
@@ -121,9 +130,6 @@ void imprimirPodioPalabrasLista(tLista* lista, int n, Cmp cmp, Accion accion, vo
 
         puesto += palabrasEnPuesto; //para avanzar x cantidad de palabras que ocuparon un mismo puesto
 
-        // Si ya tenemos n o más palabras, cortamos
-        if(totalMostradas >= n)
-            break;
     }
 }
 
