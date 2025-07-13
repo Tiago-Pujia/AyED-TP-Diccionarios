@@ -319,12 +319,12 @@
 1751941546 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios-final-final\ayed-tp-diccionarios-master\pruebas\pruebas.c
 	"pruebas.h"
 
-1750105460 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\main.c
+1752436623 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\main.c
 	"Interfaz/interfaz.h"
 	"ProcesadorTexto/procesadorTexto.h"
 	"Pruebas/pruebas.h"
 
-1750105460 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\interfaz\interfaz.h
+1752436049 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\interfaz\interfaz.h
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 	"../Lista/lista.h"
@@ -340,7 +340,7 @@
 	<stdio.h>
 	<string.h>
 
-1752433637 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.h
+1752435730 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.h
 	"../TDA_Diccionario/dic.h"
 
 1750105460 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\pruebas\pruebas.h
@@ -354,16 +354,16 @@
 	"../TDA_Diccionario/dic.h"
 	"../ProcesadorTexto/procesadorTexto.h"
 
-1752433679 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\pruebas\pruebas.c
+1752435595 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\pruebas\pruebas.c
 	"pruebas.h"
 
 1750105460 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\tda_diccionario\dic.c
 	"../TDA_Diccionario/dic.h"
 
-1752433046 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\interfaz\interfaz.c
+1752436237 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\interfaz\interfaz.c
 	"interfaz.h"
 	"../TDA_Diccionario/dic.h"
 
-1752433632 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.c
+1752436335 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.c
 	"lista.h"
 

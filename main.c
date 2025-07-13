@@ -4,16 +4,17 @@
 
 int main(int argc, char* argv[])
 {
-    int test = 1;
+    int test = 0;
+    int i = 0;
 
-    for(int i=1; i<argc; i++)
-        test = !strcmp(argv[i], "--testing") ? 1 : 0;
+    while(i < argc && !test)
+    {
+        if(!strcmp(argv[i],"--testing"))
+            test = 1;
+        i++;
+    }
 
-
-    if(test)
-        ejecutarLoteDePruebas();
-    else
-        iniciarAnalisisTexto();
+    test ? ejecutarLoteDePruebas() : iniciarAnalisisTexto();
 
     return 0;
 }

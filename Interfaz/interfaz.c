@@ -16,7 +16,6 @@ void iniciarAnalisisTexto()
     tEstText estadisticas;
 
     int continuar = 1;
-    int validacionArch;
 
     do
     {
@@ -26,7 +25,7 @@ void iniciarAnalisisTexto()
         printf("Ingrese la ruta del archivo de texto que desea analizar:\n");
         leerTexto(ruta, TAM_RUTA);
 
-        if ((validacionArch = validarArchivoTxt(ruta, &arch)) != ARCHIVO_VALIDO)
+        if (validarArchivoTxt(ruta,&arch) != ARCHIVO_VALIDO)
         {
             printf(MSJ_CONTINUAR);
             scanf("%d", &continuar);
@@ -41,7 +40,7 @@ void iniciarAnalisisTexto()
 
         limpiarConsola();
 
-        crearListaDesdeDicc(&dicc, cmpInfoDesc, &listaPodio, sizeof(int));
+        crearListaDesdeDicc(&dicc, cmpInfoDesc, &listaPodio, sizeof(int), TOP_PAL);
 
         mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
 
@@ -134,8 +133,6 @@ void mostrarInstrucciones()
 /// Muestra las estadísticas recolectadas del archivo de texto procesado.
 void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* listaPodio)
 {
-    int modoLista = 0;
-    int modoPodio = 1;
     printf("============================================================\n");
     printf("                 ESTADISTICAS DEL TEXTO                     \n");
     printf("============================================================\n");
@@ -148,13 +145,12 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* lista
     printf("------------------------------------------------------------\n\n");
 
     imprimirPodioPalabrasLista(listaPodio);
-    //imprimirPodioPalabrasLista(listaPodio, TOP_PAL, cmpInfo, imprimirPalabra, &modoPodio);
 
     printf("\n------------------------------------------------------------\n");
     printf(" LISTADO COMPLETO DE PALABRAS Y FRECUENCIAS\n");
     printf("------------------------------------------------------------\n");
 
-    recorrerDic(dic, imprimirPalabra, &modoLista);
+    recorrerDic(dic, imprimirPalabra, NULL);
 
     printf("============================================================\n");
 }
@@ -188,16 +184,7 @@ void limpiarConsola()
     #endif
 }
 
-
-void imprimirPalabra(void* clave, void* info, void* param)
+void imprimirPalabra(void* clave, void* info)
 {
-    int* frecuencia = (int*)info;
-    char* palabra = (char*)clave;
-
-    int modo = param ? *(int*)param : 0;
-
-    if(modo == 0)
-        printf("~ %s: %d\n", palabra, *frecuencia);
-    else
-        printf("\t~ %s - %d apariciones\n", palabra, *frecuencia);
+    printf("~ %s: %d\n", (char*)clave, *(int*)info);
 }

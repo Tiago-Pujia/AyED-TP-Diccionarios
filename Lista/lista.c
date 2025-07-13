@@ -21,6 +21,35 @@ void destruirLista(tLista* lista)
     }
 }
 
+void limitarLista(tLista* lista, size_t lim, Cmp cmp)
+{
+    if (!lista || !*lista || lim <= 0)
+        return;
+
+    size_t cont = 1;
+    tLista* act = lista;
+
+    // Avanza hasta el nodo n
+    while (*act && cont < lim)
+    {
+        act = &(*act)->sig;
+        cont++;
+    }
+
+    // Vamos al final del puesto, si cambia el puesto se termina
+    while(*act && (*act)->sig && !cmp((*act)->info,(*act)->sig->info))
+    {
+        act = &(*act)->sig;
+    }
+
+    // Si hay más nodos luego de los n, eliminarlos
+    if (*act && (*act)->sig)
+    {
+        destruirLista(&(*act)->sig);  // Elimina desde el siguiente en adelante
+        (*act)->sig = NULL;
+    }
+}
+
 void _crearListaDesdeDicc(void* clave, void* info, void* ctx)
 {
     ParamCrearLista* param = (ParamCrearLista*)ctx;
@@ -34,7 +63,7 @@ void _crearListaDesdeDicc(void* clave, void* info, void* ctx)
 
     insElemOrdenado(param->lista, &nodoTemp, param->cmp);
 }
-void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo)
+void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo, size_t lim)
 {
     ParamCrearLista param;
 
@@ -45,6 +74,7 @@ void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo
     param.tamInfo = tamInfo;
 
     recorrerDic(dic, _crearListaDesdeDicc, &param);
+    limitarLista(listaCreada, lim, cmp);
 }
 
 int insElemOrdenado(tLista* lista, tNodo* nodo, Cmp cmp)
@@ -52,7 +82,9 @@ int insElemOrdenado(tLista* lista, tNodo* nodo, Cmp cmp)
     tNodo* nuevo;
 
     if (!(nuevo = (tNodo*)malloc(sizeof(tNodo))))
+    {
         return SIN_MEM;
+    }
 
     if (!(nuevo->info = malloc(nodo->tamInfo)))
     {
@@ -73,7 +105,9 @@ int insElemOrdenado(tLista* lista, tNodo* nodo, Cmp cmp)
     nuevo->tamClave = nodo->tamClave;
 
     while (*lista && cmp(nodo->info, (*lista)->info) > 0)
+    {
         lista = &(*lista)->sig;
+    }
 
     nuevo->sig = *lista;
     *lista = nuevo;
@@ -119,7 +153,7 @@ void _imprimirPodioPalabrasLista(void *info, void *clave, void *param)
     }
 
     int i = 0;
-    imprimirPalabra(pal, info, i);
+    printf("\t~ %s: %d\n", pal, *frecAct);
     (ctx->palabrasEnPuesto)++;
 }
 

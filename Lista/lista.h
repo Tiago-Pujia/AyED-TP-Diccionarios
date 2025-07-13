@@ -17,8 +17,9 @@ typedef struct
 } tParamImprimirPodio;
 
 void crearLista(tLista* lista);
+void limitarLista(tLista* lista, size_t lim, Cmp cmp);
 void _crearListaDesdeDicc(void* clave, void* info, void* ctx);
-void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo);
+void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo, size_t lim);
 void destruirLista(tLista* lista);
 int  insElemOrdenado(tLista* lista, tNodo* nodo, Cmp cmp);
 int  recorrerLista(tLista* lista, Accion accion, void *param);

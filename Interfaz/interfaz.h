@@ -39,7 +39,7 @@ void mostrarInstrucciones();
 
 /// Muestra una palabra y su frecuencia (usado por recorrerDic e imprimirPodioPalabrasLista)
 
-void imprimirPalabra(void* clave, void* info, void* param);
+void imprimirPalabra(void* clave, void* info);
 
 
 /// Muestra las estadísticas recolectadas y todas las palabras registradas
