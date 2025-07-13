@@ -5,11 +5,6 @@
 //                  FUNCIONES AUXILIARES
 // =======================================================
 
-void acumularFrecuencia(void* existente, void* nuevo)
-{
-    (*(int*)existente)++;
-}
-
 
 void strToLower(char* str)
 {
@@ -65,9 +60,12 @@ void trozarLinea(char* linea, tDic* dic, tEstText* estText)
         {
             if (pPalabra != palabra)  // Si hay contenido en el buffer, se formó una palabra
             {
+                contador = 1;
                 *pPalabra = '\0';  // Terminamos la palabra con null
                 strToLower(palabra);  // Convertimos a minúscula y limpiamos
-                inserDic(dic, palabra, strlen(palabra) + 1, &contador, sizeof(contador), comparaString, acumularFrecuencia);
+                if(obtenerDic(dic, palabra, strlen(palabra) + 1, &contador, sizeof(contador), comparaString) == EXITO)
+                    contador++;
+                inserDic(dic, palabra, strlen(palabra) + 1, &contador, sizeof(contador), comparaString);
                 pPalabra = palabra;  // Reiniciamos el buffer para la siguiente palabra
                 estText->cantPalabras++;
             }

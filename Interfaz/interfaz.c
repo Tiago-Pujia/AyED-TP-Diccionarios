@@ -184,7 +184,7 @@ void limpiarConsola()
     #endif
 }
 
-void imprimirPalabra(void* clave, void* info)
+void imprimirPalabra(void* clave, void* info, void* unused)
 {
     printf("~ %s: %d\n", (char*)clave, *(int*)info);
 }

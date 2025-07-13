@@ -47,9 +47,6 @@ typedef struct
 void strToLower(char* str);
 
 
-/// Función de acumulación: incrementa la frecuencia de una palabra
-void acumularFrecuencia(void* existente, void* nuevo);
-
 int comparaString(const void *a, const void *b);
 
 

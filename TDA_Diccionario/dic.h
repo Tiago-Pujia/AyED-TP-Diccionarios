@@ -52,7 +52,6 @@ typedef struct {
 
 typedef int  (*Cmp)(const void*, const void*); // Comparación de claves
 typedef void (*Accion)(void*, void*, void*);   // Acción para recorrer el diccionario
-typedef void (*Actualizar)(void*, void*);      // Función de actualización si existe clave
 
 // =======================================================
 //                  FUNCIONES PRINCIPALES
@@ -62,7 +61,7 @@ typedef void (*Actualizar)(void*, void*);      // Función de actualización si ex
 void crearDic(tDic* const dic);
 
 /// Inserta un elemento en el diccionario o actualiza si la clave ya existe
-int inserDic(tDic* const dic, void* clave, const size_t tamClave, const void* info, const size_t tamInfo, Cmp cmp, Actualizar actualizar);
+int inserDic(tDic* const dic, void* clave, const size_t tamClave, const void* info, const size_t tamInfo, Cmp cmp);
 
 /// Busca una clave en el diccionario y copia su información
 int obtenerDic(tDic* const dic, void* clave, const size_t tamClave, void* info, const size_t tamInfo, Cmp cmp);

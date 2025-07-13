@@ -21,7 +21,7 @@ void crearDic(tDic* const dic)
 int inserDic(tDic* const dic,
              void* clave, const size_t tamClave,
              const void* dato, const size_t tamDato,
-             Cmp cmp, Actualizar actualizar)
+             Cmp cmp)
 {
     // Se obtiene la posición de la clave en la tabla hash
     size_t pos = _hasheo_dic(clave, tamClave);
@@ -33,10 +33,16 @@ int inserDic(tDic* const dic,
     // Se recorre la lista buscando si la clave ya existe
     while (*lista)
     {
+        ///Si es duplicado    **PISAMOS**     el contenido y tamaño
         if (cmp((*lista)->clave, clave) == 0)
         {
-            // Si la clave ya existe, se actualiza el dato con la función provista
-            actualizar((*lista)->info, (void*)dato);
+            void* aux = realloc((*lista)->info, tamDato);
+            if(!aux)
+                return SIN_MEM;
+            (*lista)->info = aux;
+            memcpy((*lista)->info, dato, tamDato);
+            (*lista)->tamInfo = tamDato;
+
             return EXITO;
         }
 

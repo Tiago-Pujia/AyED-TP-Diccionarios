@@ -367,3 +367,51 @@
 1752436335 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.c
 	"lista.h"
 
+1752437185 source:c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\lista\lista.c
+	"lista.h"
+
+1752436856 c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\lista\lista.h
+	"../TDA_Diccionario/dic.h"
+
+1752437500 c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1752436856 source:c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\main.c
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+	"Pruebas/pruebas.h"
+
+1752437174 c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\interfaz\interfaz.h
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Lista/lista.h"
+	<stdio.h>
+	<string.h>
+
+1752437450 c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1752436856 c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\pruebas\pruebas.h
+	"stdio.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Interfaz/interfaz.h"
+	"../Lista/lista.h"
+
+1752437672 source:c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1752436856 source:c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\pruebas\pruebas.c
+	"pruebas.h"
+
+1752437782 source:c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\tda_diccionario\dic.c
+	"../TDA_Diccionario/dic.h"
+
+1752437174 source:c:\users\bauri\downloads\ayed-tp-diccionarios-master\ayed-tp-diccionarios-master\interfaz\interfaz.c
+	"interfaz.h"
+	"../TDA_Diccionario/dic.h"
+

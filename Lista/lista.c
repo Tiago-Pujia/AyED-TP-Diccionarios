@@ -152,7 +152,6 @@ void _imprimirPodioPalabrasLista(void *info, void *clave, void *param)
         printf(">> Puesto %d:\n", ctx->puesto);
     }
 
-    int i = 0;
     printf("\t~ %s: %d\n", pal, *frecAct);
     (ctx->palabrasEnPuesto)++;
 }
