@@ -32,7 +32,7 @@ void _crearListaDesdeDicc(void* clave, void* info, void* ctx)
     nodoTemp.tamInfo = param->tamInfo;
     nodoTemp.sig = NULL;
 
-    insElemOrdenadoDesc(param->lista, &nodoTemp, param->cmp);
+    insElemOrdenado(param->lista, &nodoTemp, param->cmp);
 }
 void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo)
 {
@@ -47,7 +47,7 @@ void crearListaDesdeDicc(tDic* dic, Cmp cmp, tLista* listaCreada, size_t tamInfo
     recorrerDic(dic, _crearListaDesdeDicc, &param);
 }
 
-int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp)
+int insElemOrdenado(tLista* lista, tNodo* nodo, Cmp cmp)
 {
     tNodo* nuevo;
 
@@ -72,7 +72,7 @@ int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp)
     nuevo->tamInfo = nodo->tamInfo;
     nuevo->tamClave = nodo->tamClave;
 
-    while (*lista && cmp(nodo->info, (*lista)->info) < 0)
+    while (*lista && cmp(nodo->info, (*lista)->info) > 0)
         lista = &(*lista)->sig;
 
     nuevo->sig = *lista;
@@ -81,55 +81,54 @@ int insElemOrdenadoDesc(tLista* lista, tNodo* nodo, Cmp cmp)
     return EXITO;
 }
 
-int recorrerLista(tLista* lista, Accion accion)
+int recorrerLista(tLista* lista, Accion accion, void *param)
 {
     if(!*lista)
         return LISTA_VACIA;
 
     while(*lista)
     {
-        accion(*lista, NULL, NULL);
+        accion((*lista)->info, (*lista)->clave, param);
         lista = &(*lista)->sig;
     }
 
     return EXITO;
 }
 
-int  cmpInfo(const void* e1, const void* e2)
+int  cmpInfoDesc(const void* e1, const void* e2)
 {
     int va = *(int*)e1;
     int vb = *(int*)e2;
 
-    return va - vb;
+    return vb - va;
 }
 
-void imprimirPodioPalabrasLista(tLista* lista, int n, Cmp cmp, Accion accion, void*param)
+void _imprimirPodioPalabrasLista(void *info, void *clave, void *param)
+{
+    tParamImprimirPodio *ctx = (tParamImprimirPodio*)param;
+
+    int *frecAct = (int*)info;
+    char *pal = (char*)clave;
+
+    if(ctx->frecAnt != *frecAct)
+    {
+        ctx->frecAnt = *frecAct;
+        ctx->puesto += ctx->palabrasEnPuesto;
+        ctx->palabrasEnPuesto = 0;
+        printf(">> Puesto %d:\n", ctx->puesto);
+    }
+
+    int i = 0;
+    imprimirPalabra(pal, info, i);
+    (ctx->palabrasEnPuesto)++;
+}
+
+void imprimirPodioPalabrasLista(tLista* lista)
 {
     if (!lista || !*lista)
         return;
 
-    int totalMostradas = 0;
-    int puesto = 1;
+    tParamImprimirPodio asd = { 1, 0, -1 };
 
-    while(*lista && totalMostradas < n)
-    {
-        printf(">> Puesto %d:\n", puesto);
-
-        void* valorActual = (*lista)->info;
-        int palabrasEnPuesto = 0;
-
-        // Imprimir todas las palabras empatadas en este puesto
-        do
-        {
-            accion((*lista)->clave, (*lista)->info, param); //se imprime la palabra
-            totalMostradas++;
-            palabrasEnPuesto++;
-            lista = &(*lista)->sig;
-        }
-        while(*lista && cmp(valorActual, (*lista)->info) == 0);
-
-        puesto += palabrasEnPuesto; //para avanzar x cantidad de palabras que ocuparon un mismo puesto
-
-    }
+    recorrerLista(lista, _imprimirPodioPalabrasLista, &asd);
 }
-

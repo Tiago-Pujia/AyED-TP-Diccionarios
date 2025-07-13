@@ -319,3 +319,51 @@
 1751941546 source:c:\users\diego\desktop\los dominguez\luana unlam\algoritmos\ayed-tp-diccionarios-final-final\ayed-tp-diccionarios-master\pruebas\pruebas.c
 	"pruebas.h"
 
+1750105460 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\main.c
+	"Interfaz/interfaz.h"
+	"ProcesadorTexto/procesadorTexto.h"
+	"Pruebas/pruebas.h"
+
+1750105460 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\interfaz\interfaz.h
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Lista/lista.h"
+	<stdio.h>
+	<string.h>
+
+1750105460 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\tda_diccionario\dic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750105460 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\procesadortexto\procesadortexto.h
+	<stdio.h>
+	<string.h>
+
+1752433637 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.h
+	"../TDA_Diccionario/dic.h"
+
+1750105460 z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\pruebas\pruebas.h
+	"stdio.h"
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+	"../Interfaz/interfaz.h"
+	"../Lista/lista.h"
+
+1750105460 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\procesadortexto\procesadortexto.c
+	"../TDA_Diccionario/dic.h"
+	"../ProcesadorTexto/procesadorTexto.h"
+
+1752433679 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\pruebas\pruebas.c
+	"pruebas.h"
+
+1750105460 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\tda_diccionario\dic.c
+	"../TDA_Diccionario/dic.h"
+
+1752433046 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\interfaz\interfaz.c
+	"interfaz.h"
+	"../TDA_Diccionario/dic.h"
+
+1752433632 source:z:\tiago\unidad-drive\universidad\borrador\algoritmos\tp\ayed-tp-diccionarios\lista\lista.c
+	"lista.h"
+

@@ -41,7 +41,7 @@ void iniciarAnalisisTexto()
 
         limpiarConsola();
 
-        crearListaDesdeDicc(&dicc, cmpInfo, &listaPodio, sizeof(int));
+        crearListaDesdeDicc(&dicc, cmpInfoDesc, &listaPodio, sizeof(int));
 
         mostrarEstadisticas(&estadisticas, &dicc, &listaPodio);
 
@@ -147,7 +147,8 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* lista
     printf(" TOP %d PALABRAS MAS UTILIZADAS\n", TOP_PAL);
     printf("------------------------------------------------------------\n\n");
 
-    imprimirPodioPalabrasLista(listaPodio, TOP_PAL, cmpInfo, imprimirPalabra, &modoPodio);
+    imprimirPodioPalabrasLista(listaPodio);
+    //imprimirPodioPalabrasLista(listaPodio, TOP_PAL, cmpInfo, imprimirPalabra, &modoPodio);
 
     printf("\n------------------------------------------------------------\n");
     printf(" LISTADO COMPLETO DE PALABRAS Y FRECUENCIAS\n");
@@ -161,8 +162,6 @@ void mostrarEstadisticas(const tEstText* estText, const tDic* dic, tLista* lista
 // =======================================================
 //                  FUNCIONES AUXILIARES
 // =======================================================
-
-
 
 
 /// Lee una línea de texto desde la entrada estándar y elimina el salto de línea final.
